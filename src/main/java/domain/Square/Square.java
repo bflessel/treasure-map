@@ -38,4 +38,12 @@ public class Square {
     public int hashCode() {
         return Objects.hash(horizontalValue, verticalValue, isMountain);
     }
+
+    public int getHorizontalValue() {
+        return this.horizontalValue;
+    }
+
+    public int getVerticalValue() {
+        return this.verticalValue;
+    }
 }
