@@ -1,5 +1,5 @@
 package domain.adventurer;
 
 public enum Action {
-    MOVE_FORWARD
+    TURN_LEFT, MOVE_FORWARD
 }

@@ -15,8 +15,12 @@ public class AdventurerManager
     }
 
     private static List<Action> getAction(String input) {
-        return new  LinkedList<>(Collections.singleton(Action.MOVE_FORWARD));
-    }
+        if(input.equals("G")) {
+            return new LinkedList<>(Collections.singleton(Action.TURN_LEFT));
+        }
+            return new LinkedList<>(Collections.singleton(Action.MOVE_FORWARD));
+
+        }
 
     public void moveAdventurerForward(TreasureMap map, Adventurer adventurer) throws AdventureWrongMoveException {
         Square nextSquare = adventurer.getForwaredSquare();
