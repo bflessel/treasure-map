@@ -1,12 +1,9 @@
 package domain.adventurer;
 
 public enum Orientation {
-    SOUTH("S"), EAST("E"), WEST("O"), NORTH("N");
+    SOUTH(), EAST(), WEST(), NORTH();
 
-    private final String name;
-
-    Orientation(String name) {
-        this.name = name;
+    Orientation() {
     }
 
 

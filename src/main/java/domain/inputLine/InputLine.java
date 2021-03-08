@@ -1,6 +1,6 @@
-package domain.InputLine;
+package domain.inputLine;
 
-import domain.Square.*;
+import domain.square.*;
 import domain.adventurer.*;
 import domain.treasureMap.*;
 import exceptions.*;
@@ -36,36 +36,36 @@ public class InputLine {
 
     public TreasureMap extractMap() {
         if (this.type == InputLineType.MAP) {
-            String[] splitedInput = input.split(SEPARATOR);
-            return new TreasureMapBuilder().setHorizontalValue(Integer.parseInt(splitedInput[1])).setVerticalValue(Integer.parseInt(splitedInput[2])).createTreasureMap();
+            String[] splitInput = input.split(SEPARATOR);
+            return new TreasureMapBuilder().setHorizontalValue(Integer.parseInt(splitInput[1])).setVerticalValue(Integer.parseInt(splitInput[2])).createTreasureMap();
         }
         return null;
     }
 
     public Square extractMountain() {
         if (this.type == InputLineType.MOUNTAIN) {
-            String[] splitedInput = input.split(SEPARATOR);
-            return new SquareBuilder().setHorizontalValue(Integer.parseInt(splitedInput[1])).setVerticalValue(Integer.parseInt(splitedInput[2])).setIsMountain(true).createSquare();
+            String[] splitInput = input.split(SEPARATOR);
+            return new SquareBuilder().setHorizontalValue(Integer.parseInt(splitInput[1])).setVerticalValue(Integer.parseInt(splitInput[2])).setIsMountain(true).createSquare();
         }
         return null;    }
 
     public Square extractTreasure() {
         if (this.type == InputLineType.TREASURE) {
-            String[] splitedInput = input.split(" - ");
-            return new SquareBuilder().setHorizontalValue(Integer.parseInt(splitedInput[1])).setVerticalValue(Integer.parseInt(splitedInput[2])).setTreasureNumber(Integer.parseInt(splitedInput[3])).setIsTreasure(true).createSquare();
+            String[] splitInput = input.split(" - ");
+            return new SquareBuilder().setHorizontalValue(Integer.parseInt(splitInput[1])).setVerticalValue(Integer.parseInt(splitInput[2])).setTreasureNumber(Integer.parseInt(splitInput[3])).setIsTreasure(true).createSquare();
         }
         return null;
     }
 
     public Adventurer extractAdventurer() throws AdventurerUnknownActionException {
         if (this.type == InputLineType.ADVENTURER) {
-            String[] splitedInput = input.split(" - ");
+            String[] splitInput = input.split(" - ");
             return new AdventurerBuilder()
-                    .setName(splitedInput[1])
-                    .setHorizontalValue(Integer.parseInt(splitedInput[2]))
-                    .setVerticalValue(Integer.parseInt(splitedInput[3]))
-                    .setOrientation(Orientation.valueOfOrDefault(splitedInput[4]))
-                    .setMoveSet(splitedInput[5])
+                    .setName(splitInput[1])
+                    .setHorizontalValue(Integer.parseInt(splitInput[2]))
+                    .setVerticalValue(Integer.parseInt(splitInput[3]))
+                    .setOrientation(Orientation.valueOfOrDefault(splitInput[4]))
+                    .setMoveSet(splitInput[5])
                     .createAdventurer();
         }
         return null;

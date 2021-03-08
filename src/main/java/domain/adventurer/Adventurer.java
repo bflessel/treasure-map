@@ -1,7 +1,7 @@
 package domain.adventurer;
 
 import adventurer.*;
-import domain.Square.*;
+import domain.square.*;
 import exceptions.*;
 
 import java.util.*;
@@ -14,6 +14,19 @@ public class Adventurer {
     private final String moveSet;
     private int treasureNumber;
     private List<Action> actions;
+
+    @Override
+    public String toString() {
+        return "Adventurer{" +
+                "name='" + name + '\'' +
+                ", horizontalValue=" + horizontalValue +
+                ", verticalValue=" + verticalValue +
+                ", orientation=" + orientation +
+                ", moveSet='" + moveSet + '\'' +
+                ", treasureNumber=" + treasureNumber +
+                ", actions=" + actions +
+                '}';
+    }
 
     public Adventurer(String name, int horizontalValue, int verticalValue, Orientation orientation, String moveSet, int treasureNumber, List<Action> actions) throws AdventurerUnknownActionException {
         this.name = name;
@@ -50,7 +63,7 @@ public class Adventurer {
         return verticalValue;
     }
 
-    public Square getForwaredSquare() {
+    public Square getForwardSquare() {
         SquareBuilder builder = new SquareBuilder();
         switch (this.orientation) {
             case NORTH -> builder

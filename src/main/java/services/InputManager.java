@@ -1,6 +1,8 @@
 package services;
 
-import domain.InputLine.*;
+import domain.inputLine.*;
+import domain.treasureMap.*;
+import exceptions.*;
 
 import java.io.*;
 import java.nio.file.*;
@@ -35,9 +37,21 @@ public class InputManager {
 
     public List<InputLine> getAllInputLines(String input) {
         String[] splitLines = input.split(LINE_SEPARATOR);
-        List<InputLine>  lines = new ArrayList<>();
-        for(String line : splitLines){
+        List<InputLine> lines = new ArrayList<>();
+        for (String line : splitLines) {
             lines.add(getInputLine(line));
         }
-        return lines;    }
+        return lines;
+    }
+
+    public TreasureMap getMap(List<InputLine> inputList) throws NoMapProvidedException {
+        Optional<InputLine> optionalMap = inputList.stream().filter(i -> i.getType() == InputLineType.MAP).findFirst();
+        TreasureMap map;
+        if (optionalMap.isPresent()) {
+            map = optionalMap.get().extractMap();
+        } else {
+            throw new NoMapProvidedException();
+        }
+        return map;
+    }
 }

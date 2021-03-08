@@ -1,4 +1,4 @@
-package domain.Square;
+package domain.square;
 
 import domain.adventurer.*;
 
@@ -24,7 +24,9 @@ public class Square {
 
     public boolean isInLimits(int horizontalSize, int verticalSize) {
         return this.horizontalValue < horizontalSize &&
-                this.verticalValue < verticalSize;
+                this.verticalValue < verticalSize
+                && this.horizontalValue>=0
+                &&this.verticalValue >=0;
     }
 
     @Override

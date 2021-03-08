@@ -1,7 +1,7 @@
 package inputLine;
 
-import domain.InputLine.*;
-import domain.Square.*;
+import domain.inputLine.*;
+import domain.square.*;
 import domain.adventurer.*;
 import domain.treasureMap.*;
 import exceptions.*;

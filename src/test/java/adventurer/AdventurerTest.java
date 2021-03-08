@@ -1,6 +1,6 @@
 package adventurer;
 
-import domain.InputLine.*;
+import domain.inputLine.*;
 import domain.adventurer.*;
 import domain.treasureMap.*;
 import exceptions.*;
@@ -11,7 +11,7 @@ import java.util.*;
 
 public class AdventurerTest {
     @Test
-    public void adventurer_should_move_forward() throws WrongAdventurerPlaceException, OutOfMapException, AdventureWrongMoveException, AdventurerUnknownActionException {
+    public void adventurer_should_move_forward() throws WrongAdventurerPlaceException, OutOfMapException, AdventurerUnknownActionException {
         TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
         List<InputLine> lines = new ArrayList<>();
         lines.add(new InputLineBuilder().setInput("A - Drake - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine());
@@ -45,9 +45,7 @@ public class AdventurerTest {
         lines.add(new InputLineBuilder().setInput("M - 1 - 0").setType(InputLineType.MOUNTAIN).createInputLine());
         map.populate(lines);
         AdventurerManager adventurerManager = new AdventurerManager();
-
-        Assertions.assertThatThrownBy(() -> adventurerManager.moveAdventurerForward(map, line.extractAdventurer()))
-                .isInstanceOf(AdventureWrongMoveException.class);
+        adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
         Assertions.assertThat(map.getSquare(0, 0).getAdventurer()).isEqualTo(line.extractAdventurer().missTurn());
         Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isNotEqualTo(line.extractAdventurer().missTurn());
 
@@ -62,27 +60,27 @@ public class AdventurerTest {
         lines.add(line);
         map.populate(lines);
         AdventurerManager adventurerManager = new AdventurerManager();
-
-        Assertions.assertThatThrownBy(() -> adventurerManager.moveAdventurerForward(map, line.extractAdventurer()))
-                .isInstanceOf(AdventureWrongMoveException.class);
+        adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
+        Assertions.assertThat(map.getSquare(0,0).getAdventurer()).isEqualTo(line.extractAdventurer().missTurn());
     }
     @Test
     public void adventurer_should_not_climb_other_adventurers() throws WrongAdventurerPlaceException, OutOfMapException, AdventurerUnknownActionException {
         TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
         List<InputLine> lines = new ArrayList<>();
-        lines.add(new InputLineBuilder().setInput("A - Drake - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine());
+        InputLine line = new InputLineBuilder().setInput("A - Drake - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine();
+        lines.add(line);
         lines.add(new InputLineBuilder().setInput("A - BlackBeard - 1 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine());
         map.populate(lines);
         AdventurerManager adventurerManager = new AdventurerManager();
+        adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
 
-        Assertions.assertThatThrownBy(() -> adventurerManager.moveAdventurerForward(map, new InputLineBuilder().setInput("A - Drake - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine().extractAdventurer()))
-                .isInstanceOf(AdventureWrongMoveException.class);
+        Assertions.assertThat(map.getSquare(0,0).getAdventurer()).isEqualTo(line.extractAdventurer().missTurn());
 
     }
 
 
     @Test
-    public void adventurer_should_pick_up_treasures() throws WrongAdventurerPlaceException, AdventureWrongMoveException, OutOfMapException, AdventurerUnknownActionException {
+    public void adventurer_should_pick_up_treasures() throws WrongAdventurerPlaceException, OutOfMapException, AdventurerUnknownActionException {
         TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
         List<InputLine> lines = new ArrayList<>();
         InputLine line = new InputLineBuilder().setInput("A - Drake - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine();

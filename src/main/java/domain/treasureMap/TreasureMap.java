@@ -1,8 +1,8 @@
 package domain.treasureMap;
 
 import adventurer.*;
-import domain.InputLine.*;
-import domain.Square.*;
+import domain.inputLine.*;
+import domain.square.*;
 import domain.adventurer.*;
 import exceptions.*;
 
@@ -43,7 +43,7 @@ public class TreasureMap {
     }
 
     public void populate(List<InputLine> lines) throws OutOfMapException, WrongAdventurerPlaceException, AdventurerUnknownActionException {
-        instanciateAllSquares();
+        instantiateAllSquares();
         addAttributesFromInput(lines);
         addAdventurers(lines);
 
@@ -92,7 +92,7 @@ public class TreasureMap {
     }
 
 
-    private void instanciateAllSquares() {
+    private void instantiateAllSquares() {
         Square[][] squares = this.mapSquares;
         for (int i = 0, squaresLength = squares.length; i < squaresLength; i++) {
             Square[] horizontalSquareLine = squares[i];
@@ -106,7 +106,7 @@ public class TreasureMap {
         return this.mapSquares[horizontalValue][verticalValue];
     }
 
-    public void moveAdventurer(Adventurer adventurer, Square nextSquare) throws AdventureWrongMoveException, AdventurerUnknownActionException {
+    public void moveAdventurer(Adventurer adventurer, Square nextSquare) throws AdventurerUnknownActionException {
         if (canMove(nextSquare)) {
             int verticalValue = nextSquare.getVerticalValue();
             int horizontalValue = nextSquare.getHorizontalValue();
@@ -121,7 +121,6 @@ public class TreasureMap {
             this.adventurers.set(index,movedAdventurer);
         } else {
             new AdventurerManager().missTurn(this,adventurer);
-            throw new AdventureWrongMoveException();
         }
     }
 

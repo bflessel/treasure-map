@@ -1,4 +1,4 @@
-package domain.Square;
+package domain.square;
 
 import domain.adventurer.*;
 

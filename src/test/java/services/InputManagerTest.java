@@ -1,7 +1,7 @@
 package services;
 
 
-import domain.InputLine.*;
+import domain.inputLine.*;
 import org.assertj.core.api.*;
 import org.junit.*;
 
@@ -33,7 +33,7 @@ public class InputManagerTest {
     }
 
     @Test
-    public void shoud_return_map_input_line()  {
+    public void should_return_map_input_line()  {
         String inputTest = "C - 3 - 4";
         InputLine givenInputLine = new InputLineBuilder().setInput("C - 3 - 4").setType(InputLineType.MAP).createInputLine();
         InputLine mapSize = InputManager.getInputLine(inputTest);
@@ -41,7 +41,7 @@ public class InputManagerTest {
     }
 
     @Test
-    public void shoud_return_mountain_input_line()  {
+    public void should_return_mountain_input_line()  {
         String inputTest = "M - 3 - 4";
         InputLine givenInputLine = new InputLineBuilder().setInput("M - 3 - 4").setType(InputLineType.MOUNTAIN).createInputLine();
         InputLine mapSize = InputManager.getInputLine(inputTest);
@@ -49,7 +49,7 @@ public class InputManagerTest {
     }
 
     @Test
-    public void shoud_return_treasure_input_line()  {
+    public void should_return_treasure_input_line()  {
         String inputTest = "T - 3 - 4";
         InputLine givenInputLine = new InputLineBuilder().setInput("T - 3 - 4").setType(InputLineType.TREASURE).createInputLine();
         InputLine mapSize = InputManager.getInputLine(inputTest);
@@ -57,7 +57,7 @@ public class InputManagerTest {
     }
 
     @Test
-    public void shoud_return_adventure_input_line()  {
+    public void should_return_adventure_input_line()  {
         String inputTest = "A - 3 - 4";
         InputLine givenInputLine = new InputLineBuilder().setInput("A - 3 - 4").setType(InputLineType.ADVENTURER).createInputLine();
         InputLine mapSize = InputManager.getInputLine(inputTest);
@@ -65,7 +65,7 @@ public class InputManagerTest {
     }
 
     @Test
-    public void shoud_return_nothing_if_comment()  {
+    public void should_return_nothing_if_comment()  {
         String inputTest = "# A - 3 - 4";
         assertThat(InputManager.getInputLine(inputTest)).isNull();
     }

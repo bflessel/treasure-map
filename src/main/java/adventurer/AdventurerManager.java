@@ -1,6 +1,6 @@
 package adventurer;
 
-import domain.Square.*;
+import domain.square.*;
 import domain.adventurer.*;
 import domain.treasureMap.*;
 import exceptions.*;
@@ -20,7 +20,7 @@ public class AdventurerManager {
     private static Action getAction(Character input) throws AdventurerUnknownActionException {
         return switch (input) {
             case 'G' -> Action.TURN_LEFT;
-            case 'D' -> Action.TURN_RIGH;
+            case 'D' -> Action.TURN_RIGHT;
             case 'A' -> Action.MOVE_FORWARD;
             default -> throw new AdventurerUnknownActionException();
 
@@ -28,8 +28,8 @@ public class AdventurerManager {
 
     }
 
-    public void moveAdventurerForward(TreasureMap map, Adventurer adventurer) throws AdventureWrongMoveException, AdventurerUnknownActionException {
-        Square nextSquare = adventurer.getForwaredSquare();
+    public void moveAdventurerForward(TreasureMap map, Adventurer adventurer) throws AdventurerUnknownActionException {
+        Square nextSquare = adventurer.getForwardSquare();
         map.moveAdventurer(adventurer, nextSquare);
     }
 
@@ -45,7 +45,7 @@ public class AdventurerManager {
         map.updateAdventurer(turnedAdventurer, index);
     }
 
-    public void playActions(TreasureMap map, Adventurer ad) throws AdventureWrongMoveException, AdventurerUnknownActionException {
+    public void playActions(TreasureMap map, Adventurer ad) throws AdventurerUnknownActionException {
         Optional<Action> action = ad.getActions().stream().findFirst();
 
         if (action.isPresent()) {
@@ -53,10 +53,10 @@ public class AdventurerManager {
         }
     }
 
-    private void playAction(Action action, TreasureMap map, Adventurer adventurer) throws AdventureWrongMoveException, AdventurerUnknownActionException {
+    private void playAction(Action action, TreasureMap map, Adventurer adventurer) throws AdventurerUnknownActionException {
         switch (action) {
             case MOVE_FORWARD -> moveAdventurerForward(map, adventurer);
-            case TURN_RIGH -> turnRight(map, adventurer);
+            case TURN_RIGHT -> turnRight(map, adventurer);
             case TURN_LEFT -> turnLeft(map, adventurer);
             default -> missTurn(map,adventurer);
         }
@@ -69,7 +69,7 @@ public class AdventurerManager {
 
     }
 
-    public void playAllActions(TreasureMap map) throws AdventurerUnknownActionException, AdventureWrongMoveException {
+    public void playAllActions(TreasureMap map) throws AdventurerUnknownActionException {
         while (map.hasActions()) {
             for (Adventurer adventurer : map.getAdventurers()) {
                 playActions(map, adventurer);

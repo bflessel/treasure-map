@@ -1,4 +1,4 @@
-package domain.InputLine;
+package domain.inputLine;
 
 public class InputLineBuilder {
     private String input;
