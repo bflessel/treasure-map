@@ -48,8 +48,8 @@ public class AdventurerTest {
 
         Assertions.assertThatThrownBy(() -> adventurerManager.moveAdventurerForward(map, line.extractAdventurer()))
                 .isInstanceOf(AdventureWrongMoveException.class);
-        Assertions.assertThat(map.getSquare(0, 0).getAdventurer()).isEqualTo(line.extractAdventurer());
-        Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isNotEqualTo(line.extractAdventurer());
+        Assertions.assertThat(map.getSquare(0, 0).getAdventurer()).isEqualTo(line.extractAdventurer().missTurn());
+        Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isNotEqualTo(line.extractAdventurer().missTurn());
 
     }
 
@@ -96,6 +96,7 @@ public class AdventurerTest {
         Assertions.assertThat(map.getSquare(1, 0).getAdventurer().getTreasureNumber()).isEqualTo(1);
 
     }
+
     @Test
     public void adventurer_should_turn_left() throws WrongAdventurerPlaceException, OutOfMapException, AdventurerUnknownActionException {
         TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
@@ -110,8 +111,9 @@ public class AdventurerTest {
                 .setHorizontalValue(0)
                 .setVerticalValue(0)
                 .setOrientation(Orientation.valueOfOrDefault("N"))
-                .setMoveSet("G").
-                        createAdventurer();
+                .setMoveSet("G")
+                .setActions(new LinkedList<>())
+                .createAdventurer();
 
         Assertions.assertThat(map.getSquare(0, 0).getAdventurer()).isEqualTo(givenAdventurer);
     }
@@ -130,8 +132,9 @@ public class AdventurerTest {
                 .setHorizontalValue(0)
                 .setVerticalValue(0)
                 .setOrientation(Orientation.valueOfOrDefault("S"))
-                .setMoveSet("D").
-                        createAdventurer();
+                .setMoveSet("D")
+                .setActions(new LinkedList<>())
+                .createAdventurer();
 
         Assertions.assertThat(map.getSquare(0, 0).getAdventurer()).isEqualTo(givenAdventurer);
     }

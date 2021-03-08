@@ -1,5 +1,6 @@
 package domain.treasureMap;
 
+import adventurer.*;
 import domain.InputLine.*;
 import domain.Square.*;
 import domain.adventurer.*;
@@ -119,6 +120,7 @@ public class TreasureMap {
             this.mapSquares[horizontalValue][verticalValue].setAdventurer(movedAdventurer);
             this.adventurers.set(index,movedAdventurer);
         } else {
+            new AdventurerManager().missTurn(this,adventurer);
             throw new AdventureWrongMoveException();
         }
     }
@@ -136,8 +138,10 @@ public class TreasureMap {
     }
 
 
-        public void updateAdventurer(Adventurer adventurer) {
+        public void updateAdventurer(Adventurer adventurer, int index) {
             this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(adventurer);
+
+        this.adventurers.set(index, adventurer);
 
     }
 
@@ -151,5 +155,9 @@ public class TreasureMap {
             counter +=adventurer.getActions().size();
         }
         return counter>0;
+    }
+
+    public int getAdventurerIndex(Adventurer adventurer) {
+        return this.adventurers.indexOf(adventurer);
     }
 }

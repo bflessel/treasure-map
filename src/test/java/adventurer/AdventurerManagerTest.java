@@ -68,7 +68,7 @@ public class AdventurerManagerTest {
     }
 
     @Test
-    public void one_adventurer_should_make_one_action() throws WrongAdventurerPlaceException, OutOfMapException, AdventureWrongMoveException, AdventurerUnknownActionException {
+    public void one_adventurer_should_make_one_mouvement() throws WrongAdventurerPlaceException, OutOfMapException, AdventureWrongMoveException, AdventurerUnknownActionException {
         TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
         List<InputLine> lines = new ArrayList<>();
         InputLine line = new InputLineBuilder().setInput("A - Indiana - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine();
@@ -92,7 +92,7 @@ public class AdventurerManagerTest {
 
 
     @Test
-    public void two_adventurers_should_make_one_action() throws WrongAdventurerPlaceException, OutOfMapException, AdventureWrongMoveException, AdventurerUnknownActionException {
+    public void two_adventurers_should_make_one_mouvement() throws WrongAdventurerPlaceException, OutOfMapException, AdventureWrongMoveException, AdventurerUnknownActionException {
         TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
         List<InputLine> lines = new ArrayList<>();
         lines.add(new InputLineBuilder().setInput("A - Indiana - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine());
@@ -124,7 +124,7 @@ public class AdventurerManagerTest {
     }
 
     @Test
-    public void two_adventurers_should_make_several_action() throws WrongAdventurerPlaceException, OutOfMapException, AdventureWrongMoveException, AdventurerUnknownActionException {
+    public void two_adventurers_should_make_several_mouvement() throws WrongAdventurerPlaceException, OutOfMapException, AdventureWrongMoveException, AdventurerUnknownActionException {
         TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
         List<InputLine> lines = new ArrayList<>();
         lines.add(new InputLineBuilder().setInput("A - Indiana - 0 - 0 - E - AA").setType(InputLineType.ADVENTURER).createInputLine());
@@ -154,6 +154,30 @@ public class AdventurerManagerTest {
         Assertions.assertThat(map.getSquare(2, 0).getAdventurer()).isEqualTo(givenAdventurer);
         Assertions.assertThat(map.getSquare(2, 2).getAdventurer()).isEqualTo(otherGivenAdventurer);
     }
+
+
+    @Test
+    public void one_adventurers_should_make_several_actions() throws WrongAdventurerPlaceException, OutOfMapException, AdventureWrongMoveException, AdventurerUnknownActionException {
+        TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
+        List<InputLine> lines = new ArrayList<>();
+        lines.add(new InputLineBuilder().setInput("A - Indiana - 1 - 1 - E - ADAG").setType(InputLineType.ADVENTURER).createInputLine());
+        map.populate(lines);
+        AdventurerManager adventurerManager = new AdventurerManager();
+        adventurerManager.playAllActions(map);
+
+        List<Action> actions = new LinkedList<>();
+        Adventurer givenAdventurer = new AdventurerBuilder()
+                .setName("Indiana")
+                .setHorizontalValue(2)
+                .setVerticalValue(0)
+                .setOrientation(Orientation.valueOfOrDefault("E"))
+                .setMoveSet("ADAG")
+                .setActions(actions)
+                .createAdventurer();
+
+        Assertions.assertThat(map.getSquare(2, 0).getAdventurer()).isEqualTo(givenAdventurer);
+        }
+
 
 
 }

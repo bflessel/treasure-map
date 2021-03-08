@@ -34,13 +34,15 @@ public class AdventurerManager {
     }
 
     public void turnLeft(TreasureMap map, Adventurer adventurer) throws AdventurerUnknownActionException {
+        int index = map.getAdventurerIndex(adventurer);
         Adventurer turnedAdventurer = adventurer.turnLeft();
-        map.updateAdventurer(turnedAdventurer);
+        map.updateAdventurer(turnedAdventurer, index);
     }
 
     public void turnRight(TreasureMap map, Adventurer adventurer) throws AdventurerUnknownActionException {
+        int index = map.getAdventurerIndex(adventurer);
         Adventurer turnedAdventurer = adventurer.turnRight();
-        map.updateAdventurer(turnedAdventurer);
+        map.updateAdventurer(turnedAdventurer, index);
     }
 
     public void playActions(TreasureMap map, Adventurer ad) throws AdventureWrongMoveException, AdventurerUnknownActionException {
@@ -52,19 +54,29 @@ public class AdventurerManager {
     }
 
     private void playAction(Action action, TreasureMap map, Adventurer adventurer) throws AdventureWrongMoveException, AdventurerUnknownActionException {
-        if (action == Action.MOVE_FORWARD) {
-            moveAdventurerForward(map, adventurer);
+        switch (action) {
+            case MOVE_FORWARD -> moveAdventurerForward(map, adventurer);
+            case TURN_RIGH -> turnRight(map, adventurer);
+            case TURN_LEFT -> turnLeft(map, adventurer);
+            default -> missTurn(map,adventurer);
         }
     }
 
+    public void missTurn(TreasureMap map, Adventurer adventurer) throws AdventurerUnknownActionException {
+        int index = map.getAdventurerIndex(adventurer);
+        Adventurer turnedAdventurer = adventurer.missTurn();
+        map.updateAdventurer(turnedAdventurer, index);
+
+    }
+
     public void playAllActions(TreasureMap map) throws AdventurerUnknownActionException, AdventureWrongMoveException {
-        while (map.hasActions())  {
+        while (map.hasActions()) {
             for (Adventurer adventurer : map.getAdventurers()) {
                 playActions(map, adventurer);
             }
         }
 
 
-        }
+    }
 
 }

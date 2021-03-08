@@ -53,13 +53,17 @@ public class Adventurer {
     public Square getForwaredSquare() {
         SquareBuilder builder = new SquareBuilder();
         switch (this.orientation) {
-            case NORTH -> builder.setHorizontalValue(this.horizontalValue)
+            case NORTH -> builder
+                    .setHorizontalValue(this.horizontalValue)
                     .setVerticalValue(this.verticalValue + 1);
-            case SOUTH -> builder.setHorizontalValue(this.horizontalValue)
+            case SOUTH -> builder
+                    .setHorizontalValue(this.horizontalValue)
                     .setVerticalValue(this.verticalValue - 1);
-            case WEST -> builder.setHorizontalValue(this.horizontalValue - 1)
+            case WEST -> builder
+                    .setHorizontalValue(this.horizontalValue - 1)
                     .setVerticalValue(this.verticalValue);
-            case EAST -> builder.setHorizontalValue(this.horizontalValue + 1)
+            case EAST -> builder
+                    .setHorizontalValue(this.horizontalValue + 1)
                     .setVerticalValue(this.verticalValue);
         }
         return builder.createSquare();
@@ -101,6 +105,7 @@ public class Adventurer {
                 .setOrientation(getLeftOrientation())
                 .setName(name)
                 .setTreasureNumber(treasureNumber)
+                .setActions(getNewActionList())
                 .createAdventurer();
 
     }
@@ -125,6 +130,7 @@ public class Adventurer {
                 .setOrientation(getRightOrientation())
                 .setName(name)
                 .setTreasureNumber(treasureNumber)
+                .setActions(getNewActionList())
                 .createAdventurer();
 
     }
@@ -144,5 +150,17 @@ public class Adventurer {
 
     public List<Action> getActions() {
         return this.actions;
+    }
+
+    public Adventurer missTurn() throws AdventurerUnknownActionException {
+        return new AdventurerBuilder()
+                .setHorizontalValue(horizontalValue)
+                .setVerticalValue(verticalValue)
+                .setMoveSet(moveSet)
+                .setOrientation(orientation)
+                .setName(name)
+                .setTreasureNumber(treasureNumber)
+                .setActions(getNewActionList())
+                .createAdventurer();
     }
 }
