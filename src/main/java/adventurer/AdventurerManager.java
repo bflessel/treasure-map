@@ -17,6 +17,8 @@ public class AdventurerManager
     private static List<Action> getAction(String input) {
         if(input.equals("G")) {
             return new LinkedList<>(Collections.singleton(Action.TURN_LEFT));
+        } else if(input.equals("D")){
+            return new LinkedList<>(Collections.singleton(Action.TURN_RIGH));
         }
             return new LinkedList<>(Collections.singleton(Action.MOVE_FORWARD));
 

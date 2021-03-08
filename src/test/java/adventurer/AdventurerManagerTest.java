@@ -28,5 +28,15 @@ public class AdventurerManagerTest {
 
     }
 
+    @Test
+    public void should_get_turn_right_Action() {
+
+        List<Action> moveSets = new LinkedList<>();
+        moveSets.add(Action.TURN_RIGH);
+
+        Assertions.assertThat(AdventurerManager.getActions("D")).isEqualTo(moveSets);
+
+    }
+
 
 }
