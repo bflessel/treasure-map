@@ -22,4 +22,10 @@ public class InputManagerTest {
         Assertions.assertThat(inputTest).isEqualTo(content);
     }
 
+    @Test
+    public void should_not_return_attributeLine_with_wrong_input_line(){
+        String inputTest = "H - 3 - 4";
+        Assertions.assertThat(InputManager.getInputLine(inputTest)).isNull();
+    }
+
 }
