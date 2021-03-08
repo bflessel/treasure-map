@@ -6,6 +6,7 @@ import org.assertj.core.api.*;
 import org.junit.*;
 
 import java.io.*;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -68,5 +69,14 @@ public class InputManagerTest {
         String inputTest = "# A - 3 - 4";
         assertThat(InputManager.getInputLine(inputTest)).isNull();
     }
-
+    @Test
+    public void should_return_all_inputLines()  {
+        List<InputLine> givenInputList = new ArrayList<>();
+        givenInputList.add(new InputLineBuilder().setInput("C - 3 - 4").setType(InputLineType.MAP).createInputLine());
+        givenInputList.add(new InputLineBuilder().setInput("M - 1 - 1").setType(InputLineType.MOUNTAIN).createInputLine());
+        givenInputList.add(new InputLineBuilder().setInput("T - 1 - 3 - 1").setType(InputLineType.TREASURE).createInputLine());
+        givenInputList.add(new InputLineBuilder().setInput("A - Indiana - 1 - 1 - S - AADADA").setType(InputLineType.ADVENTURER).createInputLine());
+        List<InputLine> inputList = new InputManager().getAllInputLines(inputTest);
+        assertThat(givenInputList).isEqualTo(inputList);
+    }
 }

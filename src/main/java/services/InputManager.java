@@ -4,6 +4,7 @@ import domain.InputLine.*;
 
 import java.io.*;
 import java.nio.file.*;
+import java.util.*;
 
 public class InputManager {
 
@@ -26,4 +27,11 @@ public class InputManager {
     }
 
 
+    public List<InputLine> getAllInputLines(String input) {
+        String[] splitLines = input.split("\n");
+        List<InputLine>  lines = new ArrayList<>();
+        for(String line : splitLines){
+            lines.add(getInputLine(line));
+        }
+        return lines;    }
 }
