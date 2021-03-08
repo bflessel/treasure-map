@@ -117,7 +117,10 @@ public class TreasureMap {
     }
 
     private boolean canMove(Square nextSquare) {
-        return nextSquare.isInLimits(this.horizontalSize, this.verticalSize) && !this.mapSquares[nextSquare.getHorizontalValue()][nextSquare.getVerticalValue()].isMountain();
+        return nextSquare.isInLimits(this.horizontalSize, this.verticalSize)
+                && !this.mapSquares[nextSquare.getHorizontalValue()][nextSquare.getVerticalValue()].isMountain()
+                && !this.mapSquares[nextSquare.getHorizontalValue()][nextSquare.getVerticalValue()].hasAdventurer();
+
     }
 
 
