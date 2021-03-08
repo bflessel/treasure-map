@@ -34,12 +34,12 @@ public class Adventurer {
             return false;
         }
         Adventurer that = (Adventurer) o;
-        return horizontalValue == that.horizontalValue && verticalValue == that.verticalValue && Objects.equals(name, that.name) && orientation == that.orientation && Objects.equals(moveSet, that.moveSet);
+        return horizontalValue == that.horizontalValue && verticalValue == that.verticalValue && treasureNumber == that.treasureNumber && Objects.equals(name, that.name) && orientation == that.orientation && Objects.equals(moveSet, that.moveSet) && Objects.equals(actions, that.actions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, horizontalValue, verticalValue, orientation, moveSet);
+        return Objects.hash(name, horizontalValue, verticalValue, orientation, moveSet, treasureNumber, actions);
     }
 
     public int getHorizontalValue() {
@@ -73,9 +73,16 @@ public class Adventurer {
                 .setMoveSet(this.moveSet)
                 .setOrientation(this.orientation)
                 .setName(this.name)
+                .setActions(getNewActionList())
                 .setTreasureNumber(this.treasureNumber)
                 .createAdventurer();
 
+    }
+
+    private List<Action> getNewActionList() {
+        LinkedList<Action> newActions = new LinkedList<>(this.actions);
+        newActions.removeFirst();
+        return newActions;
     }
 
     public int getTreasureNumber() {

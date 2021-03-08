@@ -1,6 +1,7 @@
 package adventurer;
 
 import domain.InputLine.*;
+import domain.Square.*;
 import domain.adventurer.*;
 import domain.treasureMap.*;
 import exceptions.*;
@@ -83,9 +84,45 @@ public class AdventurerManagerTest {
                 .setVerticalValue(0)
                 .setOrientation(Orientation.valueOfOrDefault("E"))
                 .setMoveSet("A")
-                .setActions(actions)
+                .setActions(new LinkedList<>())
                 .createAdventurer();
 
         Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isEqualTo(givenAdventurer);
     }
+
+
+    @Test
+    public void two_adventurers_should_make_one_action() throws WrongAdventurerPlaceException, OutOfMapException, AdventureWrongMoveException, AdventurerUnknownActionException {
+        TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
+        List<InputLine> lines = new ArrayList<>();
+        lines.add(new InputLineBuilder().setInput("A - Indiana - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine());
+        lines.add(new InputLineBuilder().setInput("A - Luke - 0 - 2 - E - A").setType(InputLineType.ADVENTURER).createInputLine());
+        map.populate(lines);
+        AdventurerManager adventurerManager = new AdventurerManager();
+        adventurerManager.playAllActions(map);
+
+        List<Action> actions = new LinkedList<>();
+        Adventurer givenAdventurer = new AdventurerBuilder()
+                .setName("Indiana")
+                .setHorizontalValue(1)
+                .setVerticalValue(0)
+                .setOrientation(Orientation.valueOfOrDefault("E"))
+                .setMoveSet("A")
+                .setActions(actions)
+                .createAdventurer();
+        Adventurer otherGivenAdventurer = new AdventurerBuilder()
+                .setName("Luke")
+                .setHorizontalValue(1)
+                .setVerticalValue(2)
+                .setOrientation(Orientation.valueOfOrDefault("E"))
+                .setMoveSet("A")
+                .setActions(actions)
+                .createAdventurer();
+
+        Square $ = map.getSquare(1, 0);
+        Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isEqualTo(givenAdventurer);
+        Assertions.assertThat(map.getSquare(1, 2).getAdventurer()).isEqualTo(otherGivenAdventurer);
+    }
+
+
 }

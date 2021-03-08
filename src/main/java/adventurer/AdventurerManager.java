@@ -46,14 +46,25 @@ public class AdventurerManager {
     public void playActions(TreasureMap map, Adventurer ad) throws AdventureWrongMoveException, AdventurerUnknownActionException {
         Optional<Action> action = ad.getActions().stream().findFirst();
 
-        if(action.isPresent()){
+        if (action.isPresent()) {
             playAction(action.get(), map, ad);
         }
     }
 
     private void playAction(Action action, TreasureMap map, Adventurer adventurer) throws AdventureWrongMoveException, AdventurerUnknownActionException {
-        if(action == Action.MOVE_FORWARD){
-            moveAdventurerForward(map,adventurer);
+        if (action == Action.MOVE_FORWARD) {
+            moveAdventurerForward(map, adventurer);
         }
     }
+
+    public void playAllActions(TreasureMap map) throws AdventurerUnknownActionException, AdventureWrongMoveException {
+        while (map.hasActions())  {
+            for (Adventurer adventurer : map.getAdventurers()) {
+                playActions(map, adventurer);
+            }
+        }
+
+
+        }
+
 }

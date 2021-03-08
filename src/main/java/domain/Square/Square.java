@@ -36,12 +36,12 @@ public class Square {
             return false;
         }
         Square square = (Square) o;
-        return horizontalValue == square.horizontalValue && verticalValue == square.verticalValue && isMountain == square.isMountain;
+        return horizontalValue == square.horizontalValue && verticalValue == square.verticalValue && isMountain == square.isMountain && isTreasure == square.isTreasure && treasureNumber == square.treasureNumber && Objects.equals(adventurer, square.adventurer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(horizontalValue, verticalValue, isMountain);
+        return Objects.hash(horizontalValue, verticalValue, isMountain, isTreasure, treasureNumber, adventurer);
     }
 
     public int getHorizontalValue() {
@@ -56,12 +56,12 @@ public class Square {
         return this.adventurer;
     }
 
-    public boolean isMountain() {
-        return isMountain;
+    public boolean isNotMountain() {
+        return !isMountain;
     }
 
-    public boolean hasAdventurer() {
-        return this.adventurer != null;
+    public boolean hasNoAdventurer() {
+        return this.adventurer == null;
     }
 
     public void setAdventurer(Adventurer adventurer) {

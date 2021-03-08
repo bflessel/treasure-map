@@ -66,8 +66,8 @@ public class TreasureMap {
     }
 
     private boolean canPlaceAdventurer(Square adventurerSquare) {
-        return !this.mapSquares[adventurerSquare.getHorizontalValue()][adventurerSquare.getVerticalValue()].hasAdventurer()
-                && !this.mapSquares[adventurerSquare.getHorizontalValue()][adventurerSquare.getVerticalValue()].isMountain();
+        return this.mapSquares[adventurerSquare.getHorizontalValue()][adventurerSquare.getVerticalValue()].hasNoAdventurer()
+                && this.mapSquares[adventurerSquare.getHorizontalValue()][adventurerSquare.getVerticalValue()].isNotMountain();
 
     }
 
@@ -109,12 +109,15 @@ public class TreasureMap {
         if (canMove(nextSquare)) {
             int verticalValue = nextSquare.getVerticalValue();
             int horizontalValue = nextSquare.getHorizontalValue();
+            int index = this.adventurers.indexOf(adventurer);
             if (hasTreasure(this.mapSquares[horizontalValue][verticalValue])) {
                 adventurer.addTreasure();
                 this.mapSquares[horizontalValue][verticalValue].loseATreasure();
             }
             this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(null);
-            this.mapSquares[horizontalValue][verticalValue].setAdventurer(adventurer.getMovedAdventurer(horizontalValue, verticalValue));
+            Adventurer movedAdventurer = adventurer.getMovedAdventurer(horizontalValue, verticalValue);
+            this.mapSquares[horizontalValue][verticalValue].setAdventurer(movedAdventurer);
+            this.adventurers.set(index,movedAdventurer);
         } else {
             throw new AdventureWrongMoveException();
         }
@@ -127,8 +130,8 @@ public class TreasureMap {
 
     private boolean canMove(Square nextSquare) {
         return nextSquare.isInLimits(this.horizontalSize, this.verticalSize)
-                && !this.mapSquares[nextSquare.getHorizontalValue()][nextSquare.getVerticalValue()].isMountain()
-                && !this.mapSquares[nextSquare.getHorizontalValue()][nextSquare.getVerticalValue()].hasAdventurer();
+                && this.mapSquares[nextSquare.getHorizontalValue()][nextSquare.getVerticalValue()].isNotMountain()
+                && this.mapSquares[nextSquare.getHorizontalValue()][nextSquare.getVerticalValue()].hasNoAdventurer();
 
     }
 
@@ -136,5 +139,17 @@ public class TreasureMap {
         public void updateAdventurer(Adventurer adventurer) {
             this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(adventurer);
 
+    }
+
+    public List<Adventurer> getAdventurers() {
+        return  adventurers;
+    }
+
+    public boolean hasActions() {
+        int counter = 0;
+        for(Adventurer adventurer : this.adventurers){
+            counter +=adventurer.getActions().size();
+        }
+        return counter>0;
     }
 }
