@@ -15,4 +15,9 @@ public class AdventurerManager {
         Adventurer turnedAdventurer = adventurer.turnLeft();
         map.updateAdventurer(turnedAdventurer);
     }
+
+    public void turnRight(TreasureMap map, Adventurer adventurer) {
+        Adventurer turnedAdventurer = adventurer.turnRight();
+        map.updateAdventurer(turnedAdventurer);
+    }
 }

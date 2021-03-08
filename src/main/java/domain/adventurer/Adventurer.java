@@ -105,4 +105,29 @@ public class Adventurer {
          }
         return newOrientation;
     }
+
+    public Adventurer turnRight() {
+        return new AdventurerBuilder()
+                .setHorizontalValue(horizontalValue)
+                .setVerticalValue(verticalValue)
+                .setMoveSet(moveSet)
+                .setOrientation(getRightOrientation())
+                .setName(name)
+                .setTreasureNumber(treasureNumber)
+                .createAdventurer();
+
+    }
+
+    private Orientation getRightOrientation() {
+        Orientation newOrientation;
+        switch (this.orientation) {
+            case EAST -> newOrientation = Orientation.SOUTH;
+            case SOUTH -> newOrientation = Orientation.WEST;
+            case WEST -> newOrientation = Orientation.NORTH;
+            case NORTH -> newOrientation = Orientation.EAST;
+            default -> throw new IllegalStateException("Unexpected value: " + this.orientation);
+        }
+        return newOrientation;
+
+    }
 }
