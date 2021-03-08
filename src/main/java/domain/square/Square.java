@@ -81,4 +81,5 @@ public class Square {
     public void loseATreasure() {
         treasureNumber--;
     }
+
 }

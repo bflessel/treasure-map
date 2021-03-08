@@ -1,8 +1,8 @@
 package domain.treasureMap;
 
+import domain.adventurer.*;
 import domain.inputLine.*;
 import domain.square.*;
-import domain.adventurer.*;
 import exceptions.*;
 import services.*;
 
@@ -118,9 +118,9 @@ public class TreasureMap {
             this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(null);
             Adventurer movedAdventurer = adventurer.getMovedAdventurer(horizontalValue, verticalValue);
             this.mapSquares[horizontalValue][verticalValue].setAdventurer(movedAdventurer);
-            this.adventurers.set(index,movedAdventurer);
+            this.adventurers.set(index, movedAdventurer);
         } else {
-            new AdventurerManager().missTurn(this,adventurer);
+            new AdventurerManager().missTurn(this, adventurer);
         }
     }
 
@@ -137,26 +137,27 @@ public class TreasureMap {
     }
 
 
-        public void updateAdventurer(Adventurer adventurer, int index) {
-            this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(adventurer);
+    public void updateAdventurer(Adventurer adventurer, int index) {
+        this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(adventurer);
 
         this.adventurers.set(index, adventurer);
 
     }
 
     public List<Adventurer> getAdventurers() {
-        return  adventurers;
+        return adventurers;
     }
 
     public boolean hasActions() {
         int counter = 0;
-        for(Adventurer adventurer : this.adventurers){
-            counter +=adventurer.getActions().size();
+        for (Adventurer adventurer : this.adventurers) {
+            counter += adventurer.getActions().size();
         }
-        return counter>0;
+        return counter > 0;
     }
 
     public int getAdventurerIndex(Adventurer adventurer) {
         return this.adventurers.indexOf(adventurer);
     }
+
 }
