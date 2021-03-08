@@ -1,10 +1,13 @@
 package services;
 
 
+import domain.InputLine.*;
 import org.assertj.core.api.*;
 import org.junit.*;
 
 import java.io.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputManagerTest {
     public static final String path = "src/test/java/files";
@@ -27,5 +30,14 @@ public class InputManagerTest {
         String inputTest = "H - 3 - 4";
         Assertions.assertThat(InputManager.getInputLine(inputTest)).isNull();
     }
+
+    @Test
+    public void shoud_return_map_input_line()  {
+        String inputTest = "C - 3 - 4";
+        InputLine givenInputLine = new InputLine("C - 3 - 4",InputLineType.MAP);
+        InputLine mapSize = InputManager.getInputLine(inputTest);
+        assertThat(givenInputLine).isEqualTo(mapSize);
+    }
+
 
 }
