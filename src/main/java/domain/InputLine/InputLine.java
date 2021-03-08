@@ -70,4 +70,8 @@ public class InputLine {
         return null;
 
     }
+
+    public InputLineType getType() {
+        return type;
+    }
 }

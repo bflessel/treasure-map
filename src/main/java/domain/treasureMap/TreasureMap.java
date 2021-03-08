@@ -46,15 +46,23 @@ public class TreasureMap {
 
     private void addAttributesFromInput(List<InputLine> lines) throws OutOfMapException {
         for (InputLine line : lines) {
-
-            Square square = line.extractMountain();
-            if (square.isInLimits(this.horizontalSize, this.verticalSize)) {
-                this.mapSquares[square.getHorizontalValue()][square.getVerticalValue()] = square;
-            } else {
-                throw new OutOfMapException();
+            Optional<Square> optionalSquare = Optional.empty();
+            if (line.getType() == InputLineType.MOUNTAIN) {
+                optionalSquare = Optional.ofNullable(line.extractMountain());
+            } else if (line.getType() == InputLineType.TREASURE) {
+                optionalSquare = Optional.ofNullable(line.extractTreasure());
+            }
+            if (optionalSquare.isPresent()) {
+                Square square = optionalSquare.get();
+                if (square.isInLimits(this.horizontalSize, this.verticalSize)) {
+                    this.mapSquares[square.getHorizontalValue()][square.getVerticalValue()] = square;
+                } else {
+                    throw new OutOfMapException();
+                }
             }
         }
     }
+
 
     private void instanciateAllSquares() {
         Square[][] squares = this.mapSquares;
