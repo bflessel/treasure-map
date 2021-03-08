@@ -52,5 +52,17 @@ public class AdventurerManagerTest {
     }
 
 
+    @Test
+    public void should_get_action_list() throws AdventurerUnknownActionException {
+
+        List<Action> moveSets = new LinkedList<>();
+        moveSets.add(Action.TURN_RIGH);
+        moveSets.add(Action.TURN_LEFT);
+        moveSets.add(Action.MOVE_FORWARD);
+
+        Assertions.assertThat(AdventurerManager.getActions("DGA")).isEqualTo(moveSets);
+
+    }
+
 
 }

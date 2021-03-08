@@ -7,19 +7,22 @@ import exceptions.*;
 
 import java.util.*;
 
-public class AdventurerManager
-{
+public class AdventurerManager {
     public static List<Action> getActions(String inputs) throws AdventurerUnknownActionException {
-        return getAction(inputs);
+        List<Action> actions = new LinkedList<>();
+        for (Character input : inputs.toCharArray()) {
+            actions.add(getAction(input));
+        }
+        return actions;
 
     }
 
-    private static List<Action> getAction(String input) throws AdventurerUnknownActionException {
+    private static Action getAction(Character input) throws AdventurerUnknownActionException {
         return switch (input) {
-            case "G" -> new LinkedList<>(Collections.singleton(Action.TURN_LEFT));
-            case "D" -> new LinkedList<>(Collections.singleton(Action.TURN_RIGH));
-            case "A" -> new LinkedList<>(Collections.singleton(Action.MOVE_FORWARD));
-            default ->  throw new AdventurerUnknownActionException();
+            case 'G' -> Action.TURN_LEFT;
+            case 'D' -> Action.TURN_RIGH;
+            case 'A' -> Action.MOVE_FORWARD;
+            default -> throw new AdventurerUnknownActionException();
 
         };
 
