@@ -48,7 +48,9 @@ public class TreasureMap {
         for (InputLine line : lines) {
 
             Square square = line.extractMountain();
-            if (!square.isInLimits(this.horizontalSize, this.verticalSize)) {
+            if (square.isInLimits(this.horizontalSize, this.verticalSize)) {
+                this.mapSquares[square.getHorizontalValue()][square.getVerticalValue()] = square;
+            } else {
                 throw new OutOfMapException();
             }
         }
@@ -62,5 +64,9 @@ public class TreasureMap {
                 this.mapSquares[i][j] = new SquareBuilder().createSquare();
             }
         }
+    }
+
+    public Square getSquare(int horizontalValue, int verticalValue) {
+        return this.mapSquares[horizontalValue][verticalValue];
     }
 }

@@ -34,4 +34,15 @@ public class treasureMapTest {
     }
 
 
+    @Test
+    public void should_return_square_in_limits() throws OutOfMapException {
+        TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
+        List<InputLine> lines = new ArrayList<>();
+        InputLine line = new InputLineBuilder().setInput("M - 1 - 1").setType(InputLineType.MOUNTAIN).createInputLine();
+        lines.add(line);
+
+        map.populate(lines);
+        Assertions.assertThat(line.extractMountain()).isEqualTo(map.getSquare(1, 1));
+    }
+
 }
