@@ -2,6 +2,7 @@ package inputLine;
 
 import domain.InputLine.*;
 import domain.Square.*;
+import domain.adventurer.*;
 import domain.treasureMap.*;
 import org.junit.*;
 
@@ -38,5 +39,16 @@ public class InputLineTest {
 
         assertThat(givenMountainSquare).isEqualTo(treasure);
     }
+
+    @Test
+    public void should_return_a_adventurer(){
+        Adventurer givenAdventurer = new AdventurerBuilder().setName("Indiana").setHorizontalValue((1)).setVerticalValue((1)).setOrientation(Orientation.valueOfOrDefault("S")).setMoveSet(("AADADA")).createAdventurer();
+
+        InputLine line = new InputLineBuilder().setInput("A - Indiana - 1 - 1 - S - AADADA").setType(InputLineType.ADVENTURER).createInputLine();
+        Adventurer adventurer = line.extractAdventurer();
+
+        assertThat((givenAdventurer)).isEqualTo(adventurer);
+    }
+
 
 }

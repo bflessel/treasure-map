@@ -1,6 +1,7 @@
 package domain.InputLine;
 
 import domain.Square.*;
+import domain.adventurer.*;
 import domain.treasureMap.*;
 
 import java.util.*;
@@ -53,5 +54,20 @@ public class InputLine {
             return new SquareBuilder().setHorizontalValue(Integer.parseInt(splitedInput[1])).setVerticalValue(Integer.parseInt(splitedInput[2])).setTreasureNumber(Integer.parseInt(splitedInput[3])).setIsTreasure(true).createSquare();
         }
         return null;
+    }
+
+    public Adventurer extractAdventurer() {
+        if (this.type == InputLineType.ADVENTURER) {
+            String[] splitedInput = input.split(" - ");
+            return new AdventurerBuilder()
+                    .setName(splitedInput[1])
+                    .setHorizontalValue(Integer.parseInt(splitedInput[2]))
+                    .setVerticalValue(Integer.parseInt(splitedInput[3]))
+                    .setOrientation(Orientation.valueOfOrDefault(splitedInput[4]))
+                    .setMoveSet(splitedInput[5])
+                    .createAdventurer();
+        }
+        return null;
+
     }
 }
