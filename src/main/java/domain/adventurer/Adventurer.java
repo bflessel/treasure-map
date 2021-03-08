@@ -11,6 +11,7 @@ public class Adventurer {
     private final Orientation orientation;
     private final String moveSet;
     private int treasureNumber;
+    private List<Action> actions;
 
     public Adventurer(String name, int horizontalValue, int verticalValue, Orientation orientation, String moveSet, int treasureNumber) {
         this.name = name;
@@ -19,6 +20,7 @@ public class Adventurer {
         this.orientation = orientation;
         this.moveSet = moveSet;
         this.treasureNumber = treasureNumber;
+        this.actions = new LinkedList<>();
     }
 
     @Override
@@ -96,13 +98,13 @@ public class Adventurer {
 
     private Orientation getLeftOrientation() {
         Orientation newOrientation;
-         switch (this.orientation) {
-            case EAST -> newOrientation= Orientation.NORTH;
-            case NORTH -> newOrientation= Orientation.WEST;
-            case WEST -> newOrientation= Orientation.SOUTH;
-            case SOUTH -> newOrientation =  Orientation.EAST;
-             default -> throw new IllegalStateException("Unexpected value: " + this.orientation);
-         }
+        switch (this.orientation) {
+            case EAST -> newOrientation = Orientation.NORTH;
+            case NORTH -> newOrientation = Orientation.WEST;
+            case WEST -> newOrientation = Orientation.SOUTH;
+            case SOUTH -> newOrientation = Orientation.EAST;
+            default -> throw new IllegalStateException("Unexpected value: " + this.orientation);
+        }
         return newOrientation;
     }
 
@@ -129,5 +131,9 @@ public class Adventurer {
         }
         return newOrientation;
 
+    }
+
+    public List<Action> getActions() {
+        return this.actions;
     }
 }

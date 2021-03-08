@@ -5,7 +5,19 @@ import domain.adventurer.*;
 import domain.treasureMap.*;
 import exceptions.*;
 
-public class AdventurerManager {
+import java.util.*;
+
+public class AdventurerManager
+{
+    public static List<Action> getActions(String inputs) {
+        return getAction(inputs);
+
+    }
+
+    private static List<Action> getAction(String input) {
+        return new  LinkedList<>(Collections.singleton(Action.MOVE_FORWARD));
+    }
+
     public void moveAdventurerForward(TreasureMap map, Adventurer adventurer) throws AdventureWrongMoveException {
         Square nextSquare = adventurer.getForwaredSquare();
         map.moveAdventurer(adventurer, nextSquare);
