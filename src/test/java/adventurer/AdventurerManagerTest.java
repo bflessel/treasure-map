@@ -119,9 +119,40 @@ public class AdventurerManagerTest {
                 .setActions(actions)
                 .createAdventurer();
 
-        Square $ = map.getSquare(1, 0);
         Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isEqualTo(givenAdventurer);
         Assertions.assertThat(map.getSquare(1, 2).getAdventurer()).isEqualTo(otherGivenAdventurer);
+    }
+
+    @Test
+    public void two_adventurers_should_make_several_action() throws WrongAdventurerPlaceException, OutOfMapException, AdventureWrongMoveException, AdventurerUnknownActionException {
+        TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
+        List<InputLine> lines = new ArrayList<>();
+        lines.add(new InputLineBuilder().setInput("A - Indiana - 0 - 0 - E - AA").setType(InputLineType.ADVENTURER).createInputLine());
+        lines.add(new InputLineBuilder().setInput("A - Luke - 0 - 2 - E - AA").setType(InputLineType.ADVENTURER).createInputLine());
+        map.populate(lines);
+        AdventurerManager adventurerManager = new AdventurerManager();
+        adventurerManager.playAllActions(map);
+
+        List<Action> actions = new LinkedList<>();
+        Adventurer givenAdventurer = new AdventurerBuilder()
+                .setName("Indiana")
+                .setHorizontalValue(2)
+                .setVerticalValue(0)
+                .setOrientation(Orientation.valueOfOrDefault("E"))
+                .setMoveSet("AA")
+                .setActions(actions)
+                .createAdventurer();
+        Adventurer otherGivenAdventurer = new AdventurerBuilder()
+                .setName("Luke")
+                .setHorizontalValue(2)
+                .setVerticalValue(2)
+                .setOrientation(Orientation.valueOfOrDefault("E"))
+                .setMoveSet("AA")
+                .setActions(actions)
+                .createAdventurer();
+
+        Assertions.assertThat(map.getSquare(2, 0).getAdventurer()).isEqualTo(givenAdventurer);
+        Assertions.assertThat(map.getSquare(2, 2).getAdventurer()).isEqualTo(otherGivenAdventurer);
     }
 
 
