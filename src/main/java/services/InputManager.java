@@ -15,6 +15,8 @@ public class InputManager {
     public static InputLine getInputLine(String line) {
         if (line.startsWith("C - ")) {
             return new InputLine(line, InputLineType.MAP);
+        } else if (line.startsWith("M - ")) {
+            return new InputLineBuilder().setInput(line).setType(InputLineType.MOUNTAIN).createInputLine();
         }
         return null;
     }
