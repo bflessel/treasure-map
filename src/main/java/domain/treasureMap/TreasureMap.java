@@ -1,14 +1,16 @@
 package domain.treasureMap;
 
+import domain.Square.*;
+
 import java.util.*;
 
 public class TreasureMap {
-    private int horizontalValue;
-    private int verticalValue;
+    private int horizontalSize;
+    private int verticalSize;
 
-    public TreasureMap(int horizontalValue, int verticalValue) {
-        this.horizontalValue = horizontalValue;
-        this.verticalValue = verticalValue;
+    public TreasureMap(int horizontalSize, int verticalSize) {
+        this.horizontalSize = horizontalSize;
+        this.verticalSize = verticalSize;
     }
 
     @Override
@@ -20,11 +22,15 @@ public class TreasureMap {
             return false;
         }
         TreasureMap that = (TreasureMap) o;
-        return horizontalValue == that.horizontalValue && verticalValue == that.verticalValue;
+        return horizontalSize == that.horizontalSize && verticalSize == that.verticalSize;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(horizontalValue, verticalValue);
+        return Objects.hash(horizontalSize, verticalSize);
+    }
+
+    public boolean hasInLimits(Square square) {
+        return square.isInLimits(this.horizontalSize, this.verticalSize);
     }
 }

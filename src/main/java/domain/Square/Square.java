@@ -17,6 +17,10 @@ public class Square {
         this.isTreasure = isTreasure;
         this.treasureNumber = treasureNumber;
     }
+    public boolean isInLimits(int horizontalSize, int verticalSize) {
+        return this.horizontalValue < horizontalSize &&
+                this.verticalValue < verticalSize;
+    }
 
     @Override
     public boolean equals(Object o) {
