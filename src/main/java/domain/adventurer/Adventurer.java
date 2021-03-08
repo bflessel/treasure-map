@@ -62,14 +62,14 @@ public class Adventurer {
 
     }
 
-    public Adventurer getMovedAdventurer(int horizontalValue, int verticalValue) {
+    public Adventurer getMovedAdventurer(int newHorizontalValue, int newVerticalValue) {
         return new AdventurerBuilder()
-                .setHorizontalValue(horizontalValue)
-                .setVerticalValue(verticalValue)
-                .setMoveSet(moveSet)
-                .setOrientation(orientation)
-                .setName(name)
-                .setTreasureNumber(treasureNumber)
+                .setHorizontalValue(newHorizontalValue)
+                .setVerticalValue(newVerticalValue)
+                .setMoveSet(this.moveSet)
+                .setOrientation(this.orientation)
+                .setName(this.name)
+                .setTreasureNumber(this.treasureNumber)
                 .createAdventurer();
 
     }
@@ -80,5 +80,29 @@ public class Adventurer {
 
     public void addTreasure() {
         treasureNumber++;
+    }
+
+    public Adventurer turnLeft() {
+        return new AdventurerBuilder()
+                .setHorizontalValue(horizontalValue)
+                .setVerticalValue(verticalValue)
+                .setMoveSet(moveSet)
+                .setOrientation(getLeftOrientation())
+                .setName(name)
+                .setTreasureNumber(treasureNumber)
+                .createAdventurer();
+
+    }
+
+    private Orientation getLeftOrientation() {
+        Orientation newOrientation;
+         switch (this.orientation) {
+            case EAST -> newOrientation= Orientation.NORTH;
+            case NORTH -> newOrientation= Orientation.WEST;
+            case WEST -> newOrientation= Orientation.SOUTH;
+            case SOUTH -> newOrientation =  Orientation.EAST;
+             default -> throw new IllegalStateException("Unexpected value: " + this.orientation);
+         }
+        return newOrientation;
     }
 }

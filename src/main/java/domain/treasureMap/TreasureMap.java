@@ -133,4 +133,8 @@ public class TreasureMap {
     }
 
 
+        public void updateAdventurer(Adventurer adventurer) {
+            this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(adventurer);
+
+    }
 }

@@ -10,4 +10,9 @@ public class AdventurerManager {
         Square nextSquare = adventurer.getForwaredSquare();
         map.moveAdventurer(adventurer, nextSquare);
     }
+
+    public void turnLeft(TreasureMap map, Adventurer adventurer) {
+        Adventurer turnedAdventurer = adventurer.turnLeft();
+        map.updateAdventurer(turnedAdventurer);
+    }
 }
