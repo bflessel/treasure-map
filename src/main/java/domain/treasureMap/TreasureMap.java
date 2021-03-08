@@ -109,11 +109,20 @@ public class TreasureMap {
         if (canMove(nextSquare)) {
             int verticalValue = nextSquare.getVerticalValue();
             int horizontalValue = nextSquare.getHorizontalValue();
+            if (hasTreasure(this.mapSquares[horizontalValue][verticalValue])) {
+                adventurer.addTreasure();
+                this.mapSquares[horizontalValue][verticalValue].loseATreasure();
+            }
             this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(null);
             this.mapSquares[horizontalValue][verticalValue].setAdventurer(adventurer.getMovedAdventurer(horizontalValue, verticalValue));
         } else {
             throw new AdventureWrongMoveException();
         }
+    }
+
+    private boolean hasTreasure(Square square) {
+        return square.isTreasure() &&
+                square.getTreasureNumber() > 0;
     }
 
     private boolean canMove(Square nextSquare) {

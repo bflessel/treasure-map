@@ -67,4 +67,16 @@ public class Square {
     public void setAdventurer(Adventurer adventurer) {
         this.adventurer = adventurer;
     }
+
+    public int getTreasureNumber() {
+        return treasureNumber;
+    }
+
+    public boolean isTreasure() {
+        return isTreasure;
+    }
+
+    public void loseATreasure() {
+        treasureNumber--;
+    }
 }

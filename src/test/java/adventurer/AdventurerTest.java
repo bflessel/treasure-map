@@ -79,4 +79,22 @@ public class AdventurerTest {
                 .isInstanceOf(AdventureWrongMoveException.class);
 
     }
+
+
+    @Test
+    public void adventurer_should_pick_up_treasures() throws WrongAdventurerPlaceException, AdventureWrongMoveException, OutOfMapException {
+        TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
+        List<InputLine> lines = new ArrayList<>();
+        InputLine line = new InputLineBuilder().setInput("A - Drake - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine();
+        lines.add(line);
+        lines.add(new InputLineBuilder().setInput("T - 1 - 0 - 2").setType(InputLineType.TREASURE).createInputLine());
+        map.populate(lines);
+        AdventurerManager adventurerManager = new AdventurerManager();
+
+        adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
+        Assertions.assertThat(map.getSquare(1, 0).getTreasureNumber()).isEqualTo(1);
+        Assertions.assertThat(map.getSquare(1, 0).getAdventurer().getTreasureNumber()).isEqualTo(1);
+
+    }
+
 }

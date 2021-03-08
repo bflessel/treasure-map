@@ -6,6 +6,7 @@ public class AdventurerBuilder {
     private int verticalValue;
     private Orientation orientation;
     private String moveSet;
+    private int treasureNumber;
 
     public AdventurerBuilder setName(String name) {
         this.name = name;
@@ -33,6 +34,11 @@ public class AdventurerBuilder {
     }
 
     public Adventurer createAdventurer() {
-        return new Adventurer(name, horizontalValue, verticalValue, orientation, moveSet);
+        return new Adventurer(name, horizontalValue, verticalValue, orientation, moveSet, treasureNumber);
+    }
+
+    public AdventurerBuilder setTreasureNumber(int treasureNumber) {
+        this.treasureNumber = treasureNumber;
+        return this;
     }
 }

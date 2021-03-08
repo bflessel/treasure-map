@@ -10,13 +10,15 @@ public class Adventurer {
     private int verticalValue;
     private final Orientation orientation;
     private final String moveSet;
+    private int treasureNumber;
 
-    public Adventurer(String name, int horizontalValue, int verticalValue, Orientation orientation, String moveSet) {
+    public Adventurer(String name, int horizontalValue, int verticalValue, Orientation orientation, String moveSet, int treasureNumber) {
         this.name = name;
         this.horizontalValue = horizontalValue;
         this.verticalValue = verticalValue;
         this.orientation = orientation;
         this.moveSet = moveSet;
+        this.treasureNumber = treasureNumber;
     }
 
     @Override
@@ -61,13 +63,22 @@ public class Adventurer {
     }
 
     public Adventurer getMovedAdventurer(int horizontalValue, int verticalValue) {
-        return  new AdventurerBuilder()
+        return new AdventurerBuilder()
                 .setHorizontalValue(horizontalValue)
                 .setVerticalValue(verticalValue)
                 .setMoveSet(moveSet)
                 .setOrientation(orientation)
                 .setName(name)
+                .setTreasureNumber(treasureNumber)
                 .createAdventurer();
 
+    }
+
+    public int getTreasureNumber() {
+        return this.treasureNumber;
+    }
+
+    public void addTreasure() {
+        treasureNumber++;
     }
 }
