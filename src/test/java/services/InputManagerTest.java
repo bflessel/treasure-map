@@ -34,7 +34,15 @@ public class InputManagerTest {
     @Test
     public void shoud_return_map_input_line()  {
         String inputTest = "C - 3 - 4";
-        InputLine givenInputLine = new InputLine("C - 3 - 4",InputLineType.MAP);
+        InputLine givenInputLine = new InputLineBuilder().setInput("C - 3 - 4").setType(InputLineType.MAP).createInputLine();
+        InputLine mapSize = InputManager.getInputLine(inputTest);
+        assertThat(givenInputLine).isEqualTo(mapSize);
+    }
+
+    @Test
+    public void shoud_return_mountain_input_line()  {
+        String inputTest = "M - 3 - 4";
+        InputLine givenInputLine = new InputLineBuilder().setInput("M - 3 - 4").setType(InputLineType.MOUNTAIN).createInputLine();
         InputLine mapSize = InputManager.getInputLine(inputTest);
         assertThat(givenInputLine).isEqualTo(mapSize);
     }

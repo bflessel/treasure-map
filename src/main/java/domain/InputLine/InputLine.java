@@ -4,11 +4,11 @@ import java.util.*;
 
 public class InputLine {
     private String input;
-    private InputLineType inputLineType;
+    private InputLineType type;
 
-    public InputLine(String input, InputLineType inputLineType) {
+    public InputLine(String input, InputLineType type) {
         this.input = input;
-        this.inputLineType = inputLineType;
+        this.type = type;
     }
 
     @Override
@@ -20,11 +20,11 @@ public class InputLine {
             return false;
         }
         InputLine inputLine = (InputLine) o;
-        return Objects.equals(input, inputLine.input) && inputLineType == inputLine.inputLineType;
+        return Objects.equals(input, inputLine.input) && type == inputLine.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(input, inputLineType);
+        return Objects.hash(input, type);
     }
 }
