@@ -54,4 +54,12 @@ public class Square {
     public Adventurer getAdventurer() {
         return this.adventurer;
     }
+
+    public boolean isMountain() {
+        return isMountain;
+    }
+
+    public boolean hasAdventurer() {
+        return this.adventurer != null;
+    }
 }

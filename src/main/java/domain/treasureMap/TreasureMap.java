@@ -11,11 +11,13 @@ public class TreasureMap {
     private int horizontalSize;
     private int verticalSize;
     private Square[][] mapSquares;
+    private List<Adventurer> adventurers;
 
     public TreasureMap(int horizontalSize, int verticalSize) {
         this.horizontalSize = horizontalSize;
         this.verticalSize = verticalSize;
         this.mapSquares = new Square[horizontalSize][verticalSize];
+        this.adventurers = new ArrayList<>();
     }
 
     @Override
@@ -39,9 +41,33 @@ public class TreasureMap {
         return square.isInLimits(this.horizontalSize, this.verticalSize);
     }
 
-    public void populate(List<InputLine> lines) throws OutOfMapException {
+    public void populate(List<InputLine> lines) throws OutOfMapException, WrongAdventurerPlaceException {
         instanciateAllSquares();
         addAttributesFromInput(lines);
+        addAdventurers(lines);
+
+
+    }
+
+    private void addAdventurers(List<InputLine> lines) throws WrongAdventurerPlaceException {
+        for (InputLine line : lines) {
+            if (line.getType() == InputLineType.ADVENTURER) {
+                Adventurer adventurer = line.extractAdventurer();
+                this.adventurers.add(adventurer);
+                Square adventurerSquare = new SquareBuilder().setHorizontalValue(adventurer.getHorizontalValue()).setVerticalValue(adventurer.getVerticalValue()).setAdventurer(adventurer).createSquare();
+                if (canPlaceAdventurer(adventurerSquare)) {
+                    this.mapSquares[adventurerSquare.getHorizontalValue()][adventurerSquare.getVerticalValue()] = adventurerSquare;
+                } else {
+                    throw new WrongAdventurerPlaceException();
+                }
+
+            }
+        }
+    }
+
+    private boolean canPlaceAdventurer(Square adventurerSquare) {
+        return  !this.mapSquares[adventurerSquare.getHorizontalValue()][adventurerSquare.getVerticalValue()].hasAdventurer()
+         && !this.mapSquares[adventurerSquare.getHorizontalValue()][adventurerSquare.getVerticalValue()].isMountain();
 
     }
 
@@ -52,10 +78,6 @@ public class TreasureMap {
                 optionalSquare = Optional.ofNullable(line.extractMountain());
             } else if (line.getType() == InputLineType.TREASURE) {
                 optionalSquare = Optional.ofNullable(line.extractTreasure());
-            } else if(line.getType() == InputLineType.ADVENTURER){
-                Adventurer adventurer = line.extractAdventurer();
-
-                optionalSquare = Optional.ofNullable(new SquareBuilder().setHorizontalValue(adventurer.getHorizontalValue()).setVerticalValue(adventurer.getVerticalValue()).setAdventurer(adventurer).createSquare());
             }
             if (optionalSquare.isPresent()) {
                 Square square = optionalSquare.get();
