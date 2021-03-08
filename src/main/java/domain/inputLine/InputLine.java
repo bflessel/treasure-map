@@ -75,4 +75,8 @@ public class InputLine {
     public InputLineType getType() {
         return type;
     }
+
+    public String getInput() {
+        return input;
+    }
 }

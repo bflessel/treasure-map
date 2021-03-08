@@ -1,4 +1,4 @@
-package adventurer;
+package services;
 
 import domain.square.*;
 import domain.adventurer.*;

@@ -1,8 +1,8 @@
 package domain.adventurer;
 
-import adventurer.*;
 import domain.square.*;
 import exceptions.*;
+import services.*;
 
 import java.util.*;
 

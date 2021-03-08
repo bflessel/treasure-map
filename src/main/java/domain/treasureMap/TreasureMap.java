@@ -1,10 +1,10 @@
 package domain.treasureMap;
 
-import adventurer.*;
 import domain.inputLine.*;
 import domain.square.*;
 import domain.adventurer.*;
 import exceptions.*;
+import services.*;
 
 import java.util.*;
 

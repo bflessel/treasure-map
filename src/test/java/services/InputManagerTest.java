@@ -44,24 +44,24 @@ public class InputManagerTest {
     public void should_return_mountain_input_line()  {
         String inputTest = "M - 3 - 4";
         InputLine givenInputLine = new InputLineBuilder().setInput("M - 3 - 4").setType(InputLineType.MOUNTAIN).createInputLine();
-        InputLine mapSize = InputManager.getInputLine(inputTest);
-        assertThat(givenInputLine).isEqualTo(mapSize);
+        InputLine mountain = InputManager.getInputLine(inputTest);
+        assertThat(givenInputLine).isEqualTo(mountain);
     }
 
     @Test
     public void should_return_treasure_input_line()  {
         String inputTest = "T - 3 - 4";
         InputLine givenInputLine = new InputLineBuilder().setInput("T - 3 - 4").setType(InputLineType.TREASURE).createInputLine();
-        InputLine mapSize = InputManager.getInputLine(inputTest);
-        assertThat(givenInputLine).isEqualTo(mapSize);
+        InputLine treasureLine = InputManager.getInputLine(inputTest);
+        assertThat(givenInputLine).isEqualTo(treasureLine);
     }
 
     @Test
     public void should_return_adventure_input_line()  {
         String inputTest = "A - 3 - 4";
         InputLine givenInputLine = new InputLineBuilder().setInput("A - 3 - 4").setType(InputLineType.ADVENTURER).createInputLine();
-        InputLine mapSize = InputManager.getInputLine(inputTest);
-        assertThat(givenInputLine).isEqualTo( mapSize);
+        InputLine adventureLine = InputManager.getInputLine(inputTest);
+        assertThat(givenInputLine).isEqualTo( adventureLine);
     }
 
     @Test

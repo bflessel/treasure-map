@@ -1,4 +1,3 @@
-import adventurer.*;
 import domain.inputLine.*;
 import domain.treasureMap.*;
 import exceptions.*;
