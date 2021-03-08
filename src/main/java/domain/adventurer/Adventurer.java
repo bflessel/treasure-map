@@ -33,4 +33,12 @@ public class Adventurer {
     public int hashCode() {
         return Objects.hash(name, horizontalValue, verticalValue, orientation, moveSet);
     }
+
+    public int getHorizontalValue() {
+        return horizontalValue;
+    }
+
+    public int getVerticalValue() {
+        return verticalValue;
+    }
 }

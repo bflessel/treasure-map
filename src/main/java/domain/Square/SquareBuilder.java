@@ -1,11 +1,14 @@
 package domain.Square;
 
+import domain.adventurer.*;
+
 public class SquareBuilder {
     private int horizontalValue;
     private int verticalValue;
     private boolean isMountain;
     private boolean isTreasure;
     private int treasureNumber;
+    private Adventurer adventurer;
 
     public SquareBuilder setHorizontalValue(int horizontalValue) {
         this.horizontalValue = horizontalValue;
@@ -23,7 +26,7 @@ public class SquareBuilder {
     }
 
     public Square createSquare() {
-        return new Square(horizontalValue, verticalValue, isMountain,isTreasure,treasureNumber);
+        return new Square(horizontalValue, verticalValue, isMountain, isTreasure, treasureNumber, adventurer);
     }
 
     public SquareBuilder setIsTreasure(boolean isTreasure) {
@@ -33,6 +36,11 @@ public class SquareBuilder {
 
     public SquareBuilder setTreasureNumber(int treasureNumber) {
         this.treasureNumber = treasureNumber;
+        return this;
+    }
+
+    public SquareBuilder setAdventurer(Adventurer adventurer) {
+        this.adventurer = adventurer;
         return this;
     }
 }

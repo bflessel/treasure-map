@@ -2,6 +2,7 @@ package domain.treasureMap;
 
 import domain.InputLine.*;
 import domain.Square.*;
+import domain.adventurer.*;
 import exceptions.*;
 
 import java.util.*;
@@ -51,6 +52,10 @@ public class TreasureMap {
                 optionalSquare = Optional.ofNullable(line.extractMountain());
             } else if (line.getType() == InputLineType.TREASURE) {
                 optionalSquare = Optional.ofNullable(line.extractTreasure());
+            } else if(line.getType() == InputLineType.ADVENTURER){
+                Adventurer adventurer = line.extractAdventurer();
+
+                optionalSquare = Optional.ofNullable(new SquareBuilder().setHorizontalValue(adventurer.getHorizontalValue()).setVerticalValue(adventurer.getVerticalValue()).setAdventurer(adventurer).createSquare());
             }
             if (optionalSquare.isPresent()) {
                 Square square = optionalSquare.get();

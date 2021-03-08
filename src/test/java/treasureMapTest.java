@@ -1,5 +1,6 @@
 import domain.InputLine.*;
 import domain.Square.*;
+import domain.adventurer.*;
 import domain.treasureMap.*;
 import exceptions.*;
 import org.assertj.core.api.*;
@@ -55,6 +56,19 @@ public class treasureMapTest {
         map.populate(lines);
         Square square = map.getSquare(1, 1);
         Assertions.assertThat(line.extractTreasure()).isEqualTo(square);
+    }
+
+    @Test
+    public void should_return_square_with_adventurer() throws OutOfMapException {
+        TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
+        List<InputLine> lines = new ArrayList<>();
+        InputLine line = new InputLineBuilder().setInput("A - Indiana - 1 - 1 - S - AADADA").setType(InputLineType.ADVENTURER).createInputLine();
+        lines.add(line);
+        map.populate(lines);
+        Adventurer givenAdventurer = new AdventurerBuilder().setName("Indiana").setHorizontalValue(1).setVerticalValue(1).setOrientation(Orientation.valueOfOrDefault("S")).setMoveSet("AADADA").createAdventurer();
+
+        Assertions.assertThat(givenAdventurer).isEqualTo(map.getSquare(1, 1).getAdventurer());
+
     }
 
 }

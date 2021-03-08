@@ -1,5 +1,7 @@
 package domain.Square;
 
+import domain.adventurer.*;
+
 import java.util.*;
 
 public class Square {
@@ -8,14 +10,16 @@ public class Square {
     private boolean isMountain;
     private boolean isTreasure;
     private int treasureNumber;
+    private Adventurer adventurer;
 
-    public Square(int horizontalValue, int verticalValue, boolean isMountain, boolean isTreasure, int treasureNumber) {
+    public Square(int horizontalValue, int verticalValue, boolean isMountain, boolean isTreasure, int treasureNumber, Adventurer adventurer) {
         this.horizontalValue = horizontalValue;
         this.verticalValue = verticalValue;
 
         this.isMountain = isMountain;
         this.isTreasure = isTreasure;
         this.treasureNumber = treasureNumber;
+        this.adventurer = adventurer;
     }
     public boolean isInLimits(int horizontalSize, int verticalSize) {
         return this.horizontalValue < horizontalSize &&
@@ -45,5 +49,9 @@ public class Square {
 
     public int getVerticalValue() {
         return this.verticalValue;
+    }
+
+    public Adventurer getAdventurer() {
+        return this.adventurer;
     }
 }
