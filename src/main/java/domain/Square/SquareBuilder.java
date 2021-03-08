@@ -4,6 +4,8 @@ public class SquareBuilder {
     private int horizontalValue;
     private int verticalValue;
     private boolean isMountain;
+    private boolean isTreasure;
+    private int treasureNumber;
 
     public SquareBuilder setHorizontalValue(int horizontalValue) {
         this.horizontalValue = horizontalValue;
@@ -21,6 +23,16 @@ public class SquareBuilder {
     }
 
     public Square createSquare() {
-        return new Square(horizontalValue, verticalValue, isMountain);
+        return new Square(horizontalValue, verticalValue, isMountain,isTreasure,treasureNumber);
+    }
+
+    public SquareBuilder setIsTreasure(boolean isTreasure) {
+        this.isTreasure = isTreasure;
+        return this;
+    }
+
+    public SquareBuilder setTreasureNumber(int treasureNumber) {
+        this.treasureNumber = treasureNumber;
+        return this;
     }
 }

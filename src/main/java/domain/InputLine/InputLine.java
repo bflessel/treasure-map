@@ -46,4 +46,12 @@ public class InputLine {
             return new SquareBuilder().setHorizontalValue(Integer.parseInt(splitedInput[1])).setVerticalValue(Integer.parseInt(splitedInput[2])).setIsMountain(true).createSquare();
         }
         return null;    }
+
+    public Square extractTreasure() {
+        if (this.type == InputLineType.TREASURE) {
+            String[] splitedInput = input.split(" - ");
+            return new SquareBuilder().setHorizontalValue(Integer.parseInt(splitedInput[1])).setVerticalValue(Integer.parseInt(splitedInput[2])).setTreasureNumber(Integer.parseInt(splitedInput[3])).setIsTreasure(true).createSquare();
+        }
+        return null;
+    }
 }

@@ -6,12 +6,16 @@ public class Square {
     private int horizontalValue;
     private int verticalValue;
     private boolean isMountain;
+    private boolean isTreasure;
+    private int treasureNumber;
 
-    public Square(int horizontalValue, int verticalValue, boolean isMountain) {
+    public Square(int horizontalValue, int verticalValue, boolean isMountain, boolean isTreasure, int treasureNumber) {
         this.horizontalValue = horizontalValue;
         this.verticalValue = verticalValue;
 
         this.isMountain = isMountain;
+        this.isTreasure = isTreasure;
+        this.treasureNumber = treasureNumber;
     }
 
     @Override

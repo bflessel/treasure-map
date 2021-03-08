@@ -29,4 +29,14 @@ public class InputLineTest {
         assertThat(givenMountainSquare).isEqualTo(mountain);
     }
 
+    @Test
+    public void should_return_a_treasure_square(){
+        Square givenMountainSquare = new SquareBuilder().setHorizontalValue(3).setVerticalValue(4).setIsTreasure(true).setTreasureNumber(2).createSquare();
+
+        InputLine line = new InputLineBuilder().setInput("T - 3 - 4 - 2").setType(InputLineType.TREASURE).createInputLine();
+        Square treasure = line.extractTreasure();
+
+        assertThat(givenMountainSquare).isEqualTo(treasure);
+    }
+
 }
