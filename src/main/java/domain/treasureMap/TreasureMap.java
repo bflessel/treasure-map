@@ -107,19 +107,17 @@ public class TreasureMap {
 
     public void moveAdventurer(Adventurer adventurer, Square nextSquare) throws AdventureWrongMoveException {
         if (canMove(nextSquare)) {
-
             int verticalValue = nextSquare.getVerticalValue();
             int horizontalValue = nextSquare.getHorizontalValue();
             this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(null);
             this.mapSquares[horizontalValue][verticalValue].setAdventurer(adventurer.getMovedAdventurer(horizontalValue, verticalValue));
         } else {
-            throw  new AdventureWrongMoveException();
+            throw new AdventureWrongMoveException();
         }
     }
 
     private boolean canMove(Square nextSquare) {
-
-        return !this.mapSquares[nextSquare.getHorizontalValue()][nextSquare.getVerticalValue()].isMountain();
+        return nextSquare.isInLimits(this.horizontalSize, this.verticalSize) && !this.mapSquares[nextSquare.getHorizontalValue()][nextSquare.getVerticalValue()].isMountain();
     }
 
 

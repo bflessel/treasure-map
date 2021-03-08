@@ -52,4 +52,19 @@ public class AdventurerTest {
         Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isNotEqualTo(line.extractAdventurer());
 
     }
+
+
+    @Test
+    public void adventurer_should_not_move_outside_map() throws WrongAdventurerPlaceException, OutOfMapException {
+        TreasureMap map = new TreasureMapBuilder().setHorizontalValue(1).setVerticalValue(1).createTreasureMap();
+        List<InputLine> lines = new ArrayList<>();
+        InputLine line = new InputLineBuilder().setInput("A - Drake - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine();
+        lines.add(line);
+        map.populate(lines);
+        AdventurerManager adventurerManager = new AdventurerManager();
+
+        Assertions.assertThatThrownBy(() -> adventurerManager.moveAdventurerForward(map, line.extractAdventurer()))
+                .isInstanceOf(AdventureWrongMoveException.class);
+    }
+
 }
