@@ -1,5 +1,5 @@
 package domain.InputLine;
 
 public enum InputLineType {
-    MOUNTAIN, MAP
+    MOUNTAIN, TREASURE, ADVENTURER, MAP
 }

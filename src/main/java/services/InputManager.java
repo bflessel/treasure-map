@@ -17,6 +17,10 @@ public class InputManager {
             return new InputLine(line, InputLineType.MAP);
         } else if (line.startsWith("M - ")) {
             return new InputLineBuilder().setInput(line).setType(InputLineType.MOUNTAIN).createInputLine();
+        } else if (line.startsWith("T - ")) {
+            return new InputLineBuilder().setInput(line).setType(InputLineType.TREASURE).createInputLine();
+        } else if (line.startsWith("A - ")) {
+            return new InputLineBuilder().setInput(line).setType(InputLineType.ADVENTURER).createInputLine();
         }
         return null;
     }
