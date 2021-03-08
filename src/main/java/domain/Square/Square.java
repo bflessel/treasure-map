@@ -21,6 +21,7 @@ public class Square {
         this.treasureNumber = treasureNumber;
         this.adventurer = adventurer;
     }
+
     public boolean isInLimits(int horizontalSize, int verticalSize) {
         return this.horizontalValue < horizontalSize &&
                 this.verticalValue < verticalSize;
@@ -61,5 +62,9 @@ public class Square {
 
     public boolean hasAdventurer() {
         return this.adventurer != null;
+    }
+
+    public void setAdventurer(Adventurer adventurer) {
+        this.adventurer = adventurer;
     }
 }

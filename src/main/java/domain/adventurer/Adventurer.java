@@ -1,11 +1,13 @@
 package domain.adventurer;
 
+import domain.Square.*;
+
 import java.util.*;
 
 public class Adventurer {
     private final String name;
-    private final int horizontalValue;
-    private final int verticalValue;
+    private int horizontalValue;
+    private int verticalValue;
     private final Orientation orientation;
     private final String moveSet;
 
@@ -40,5 +42,32 @@ public class Adventurer {
 
     public int getVerticalValue() {
         return verticalValue;
+    }
+
+    public Square getForwaredSquare() {
+        SquareBuilder builder = new SquareBuilder();
+        switch (this.orientation) {
+            case NORTH -> builder.setHorizontalValue(this.horizontalValue)
+                    .setVerticalValue(this.verticalValue + 1);
+            case SOUTH -> builder.setHorizontalValue(this.horizontalValue)
+                    .setVerticalValue(this.verticalValue - 1);
+            case WEST -> builder.setHorizontalValue(this.horizontalValue - 1)
+                    .setVerticalValue(this.verticalValue);
+            case EAST -> builder.setHorizontalValue(this.horizontalValue + 1)
+                    .setVerticalValue(this.verticalValue);
+        }
+        return builder.createSquare();
+
+    }
+
+    public Adventurer getMovedAdventurer(int horizontalValue, int verticalValue) {
+        return  new AdventurerBuilder()
+                .setHorizontalValue(horizontalValue)
+                .setVerticalValue(verticalValue)
+                .setMoveSet(moveSet)
+                .setOrientation(orientation)
+                .setName(name)
+                .createAdventurer();
+
     }
 }

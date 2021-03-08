@@ -66,8 +66,8 @@ public class TreasureMap {
     }
 
     private boolean canPlaceAdventurer(Square adventurerSquare) {
-        return  !this.mapSquares[adventurerSquare.getHorizontalValue()][adventurerSquare.getVerticalValue()].hasAdventurer()
-         && !this.mapSquares[adventurerSquare.getHorizontalValue()][adventurerSquare.getVerticalValue()].isMountain();
+        return !this.mapSquares[adventurerSquare.getHorizontalValue()][adventurerSquare.getVerticalValue()].hasAdventurer()
+                && !this.mapSquares[adventurerSquare.getHorizontalValue()][adventurerSquare.getVerticalValue()].isMountain();
 
     }
 
@@ -103,5 +103,13 @@ public class TreasureMap {
 
     public Square getSquare(int horizontalValue, int verticalValue) {
         return this.mapSquares[horizontalValue][verticalValue];
+    }
+
+    public void moveAdventurer(Adventurer adventurer, Square nextSquare) {
+        int verticalValue = nextSquare.getVerticalValue();
+        int horizontalValue = nextSquare.getHorizontalValue();
+        this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(null);
+
+        this.mapSquares[horizontalValue][verticalValue].setAdventurer(adventurer.getMovedAdventurer(horizontalValue, verticalValue));
     }
 }
