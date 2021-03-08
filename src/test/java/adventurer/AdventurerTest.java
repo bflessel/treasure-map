@@ -11,7 +11,7 @@ import java.util.*;
 
 public class AdventurerTest {
     @Test
-    public void adventurer_should_move_forward() throws WrongAdventurerPlaceException, OutOfMapException {
+    public void adventurer_should_move_forward() throws WrongAdventurerPlaceException, OutOfMapException, AdventureWrongMoveException {
         TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
         List<InputLine> lines = new ArrayList<>();
         lines.add(new InputLineBuilder().setInput("A - Drake - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine());
@@ -33,6 +33,23 @@ public class AdventurerTest {
         Assertions.assertThat(map.getSquare(2, 3).getAdventurer()).isEqualTo(givenAdventurer2);
         Assertions.assertThat(map.getSquare(3, 2).getAdventurer()).isEqualTo(givenAdventurer3);
 
+
+    }
+
+    @Test
+    public void adventurer_should_not_climb_mountains() throws WrongAdventurerPlaceException, OutOfMapException {
+        TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
+        List<InputLine> lines = new ArrayList<>();
+        InputLine line = new InputLineBuilder().setInput("A - Drake - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine();
+        lines.add(line);
+        lines.add(new InputLineBuilder().setInput("M - 1 - 0").setType(InputLineType.MOUNTAIN).createInputLine());
+        map.populate(lines);
+        AdventurerManager adventurerManager = new AdventurerManager();
+
+        Assertions.assertThatThrownBy(() -> adventurerManager.moveAdventurerForward(map, line.extractAdventurer()))
+                .isInstanceOf(AdventureWrongMoveException.class);
+        Assertions.assertThat(map.getSquare(0, 0).getAdventurer()).isEqualTo(line.extractAdventurer());
+        Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isNotEqualTo(line.extractAdventurer());
 
     }
 }

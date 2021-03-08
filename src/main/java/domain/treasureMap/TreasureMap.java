@@ -105,11 +105,22 @@ public class TreasureMap {
         return this.mapSquares[horizontalValue][verticalValue];
     }
 
-    public void moveAdventurer(Adventurer adventurer, Square nextSquare) {
-        int verticalValue = nextSquare.getVerticalValue();
-        int horizontalValue = nextSquare.getHorizontalValue();
-        this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(null);
+    public void moveAdventurer(Adventurer adventurer, Square nextSquare) throws AdventureWrongMoveException {
+        if (canMove(nextSquare)) {
 
-        this.mapSquares[horizontalValue][verticalValue].setAdventurer(adventurer.getMovedAdventurer(horizontalValue, verticalValue));
+            int verticalValue = nextSquare.getVerticalValue();
+            int horizontalValue = nextSquare.getHorizontalValue();
+            this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(null);
+            this.mapSquares[horizontalValue][verticalValue].setAdventurer(adventurer.getMovedAdventurer(horizontalValue, verticalValue));
+        } else {
+            throw  new AdventureWrongMoveException();
+        }
     }
+
+    private boolean canMove(Square nextSquare) {
+
+        return !this.mapSquares[nextSquare.getHorizontalValue()][nextSquare.getVerticalValue()].isMountain();
+    }
+
+
 }
