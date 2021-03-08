@@ -36,7 +36,7 @@ public class treasureMapTest {
 
 
     @Test
-    public void should_return_square_in_limits() throws OutOfMapException, WrongAdventurerPlaceException {
+    public void should_return_square_in_limits() throws OutOfMapException, WrongAdventurerPlaceException, AdventurerUnknownActionException {
         TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
         List<InputLine> lines = new ArrayList<>();
         InputLine line = new InputLineBuilder().setInput("M - 1 - 1").setType(InputLineType.MOUNTAIN).createInputLine();
@@ -47,7 +47,7 @@ public class treasureMapTest {
     }
 
     @Test
-    public void should_return_treasure_square_in_limits() throws OutOfMapException, WrongAdventurerPlaceException {
+    public void should_return_treasure_square_in_limits() throws OutOfMapException, WrongAdventurerPlaceException, AdventurerUnknownActionException {
         TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
         List<InputLine> lines = new ArrayList<>();
         InputLine line = new InputLineBuilder().setInput("T - 1 - 1 - 2").setType(InputLineType.TREASURE).createInputLine();
@@ -59,7 +59,7 @@ public class treasureMapTest {
     }
 
     @Test
-    public void should_return_square_with_adventurer() throws OutOfMapException, WrongAdventurerPlaceException {
+    public void should_return_square_with_adventurer() throws OutOfMapException, WrongAdventurerPlaceException, AdventurerUnknownActionException {
         TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
         List<InputLine> lines = new ArrayList<>();
         InputLine line = new InputLineBuilder().setInput("A - Indiana - 1 - 1 - S - AADADA").setType(InputLineType.ADVENTURER).createInputLine();

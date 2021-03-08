@@ -1,5 +1,9 @@
 package domain.adventurer;
 
+import exceptions.*;
+
+import java.util.*;
+
 public class AdventurerBuilder {
     private String name;
     private int horizontalValue;
@@ -7,6 +11,7 @@ public class AdventurerBuilder {
     private Orientation orientation;
     private String moveSet;
     private int treasureNumber;
+    private List<Action> actions;
 
     public AdventurerBuilder setName(String name) {
         this.name = name;
@@ -33,12 +38,17 @@ public class AdventurerBuilder {
         return this;
     }
 
-    public Adventurer createAdventurer() {
-        return new Adventurer(name, horizontalValue, verticalValue, orientation, moveSet, treasureNumber);
+    public Adventurer createAdventurer() throws AdventurerUnknownActionException {
+        return new Adventurer(name, horizontalValue, verticalValue, orientation, moveSet, treasureNumber,actions);
     }
 
     public AdventurerBuilder setTreasureNumber(int treasureNumber) {
         this.treasureNumber = treasureNumber;
+        return this;
+    }
+
+    public AdventurerBuilder setActions(List<Action> actions) {
+    this.actions = actions;
         return this;
     }
 }

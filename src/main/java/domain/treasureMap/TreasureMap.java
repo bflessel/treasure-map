@@ -41,7 +41,7 @@ public class TreasureMap {
         return square.isInLimits(this.horizontalSize, this.verticalSize);
     }
 
-    public void populate(List<InputLine> lines) throws OutOfMapException, WrongAdventurerPlaceException {
+    public void populate(List<InputLine> lines) throws OutOfMapException, WrongAdventurerPlaceException, AdventurerUnknownActionException {
         instanciateAllSquares();
         addAttributesFromInput(lines);
         addAdventurers(lines);
@@ -49,7 +49,7 @@ public class TreasureMap {
 
     }
 
-    private void addAdventurers(List<InputLine> lines) throws WrongAdventurerPlaceException {
+    private void addAdventurers(List<InputLine> lines) throws WrongAdventurerPlaceException, AdventurerUnknownActionException {
         for (InputLine line : lines) {
             if (line.getType() == InputLineType.ADVENTURER) {
                 Adventurer adventurer = line.extractAdventurer();
@@ -105,7 +105,7 @@ public class TreasureMap {
         return this.mapSquares[horizontalValue][verticalValue];
     }
 
-    public void moveAdventurer(Adventurer adventurer, Square nextSquare) throws AdventureWrongMoveException {
+    public void moveAdventurer(Adventurer adventurer, Square nextSquare) throws AdventureWrongMoveException, AdventurerUnknownActionException {
         if (canMove(nextSquare)) {
             int verticalValue = nextSquare.getVerticalValue();
             int horizontalValue = nextSquare.getHorizontalValue();

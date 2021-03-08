@@ -4,6 +4,7 @@ import domain.InputLine.*;
 import domain.Square.*;
 import domain.adventurer.*;
 import domain.treasureMap.*;
+import exceptions.*;
 import org.junit.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,7 +42,7 @@ public class InputLineTest {
     }
 
     @Test
-    public void should_return_a_adventurer(){
+    public void should_return_a_adventurer() throws AdventurerUnknownActionException {
         Adventurer givenAdventurer = new AdventurerBuilder().setName("Indiana").setHorizontalValue((1)).setVerticalValue((1)).setOrientation(Orientation.valueOfOrDefault("S")).setMoveSet(("AADADA")).createAdventurer();
 
         InputLine line = new InputLineBuilder().setInput("A - Indiana - 1 - 1 - S - AADADA").setType(InputLineType.ADVENTURER).createInputLine();

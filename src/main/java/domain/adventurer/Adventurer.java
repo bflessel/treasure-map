@@ -1,6 +1,8 @@
 package domain.adventurer;
 
+import adventurer.*;
 import domain.Square.*;
+import exceptions.*;
 
 import java.util.*;
 
@@ -13,14 +15,14 @@ public class Adventurer {
     private int treasureNumber;
     private List<Action> actions;
 
-    public Adventurer(String name, int horizontalValue, int verticalValue, Orientation orientation, String moveSet, int treasureNumber) {
+    public Adventurer(String name, int horizontalValue, int verticalValue, Orientation orientation, String moveSet, int treasureNumber, List<Action> actions) throws AdventurerUnknownActionException {
         this.name = name;
         this.horizontalValue = horizontalValue;
         this.verticalValue = verticalValue;
         this.orientation = orientation;
         this.moveSet = moveSet;
         this.treasureNumber = treasureNumber;
-        this.actions = new LinkedList<>();
+        this.actions = actions != null ? actions : AdventurerManager.getActions(moveSet);
     }
 
     @Override
@@ -64,7 +66,7 @@ public class Adventurer {
 
     }
 
-    public Adventurer getMovedAdventurer(int newHorizontalValue, int newVerticalValue) {
+    public Adventurer getMovedAdventurer(int newHorizontalValue, int newVerticalValue) throws AdventurerUnknownActionException {
         return new AdventurerBuilder()
                 .setHorizontalValue(newHorizontalValue)
                 .setVerticalValue(newVerticalValue)
@@ -84,7 +86,7 @@ public class Adventurer {
         treasureNumber++;
     }
 
-    public Adventurer turnLeft() {
+    public Adventurer turnLeft() throws AdventurerUnknownActionException {
         return new AdventurerBuilder()
                 .setHorizontalValue(horizontalValue)
                 .setVerticalValue(verticalValue)
@@ -108,7 +110,7 @@ public class Adventurer {
         return newOrientation;
     }
 
-    public Adventurer turnRight() {
+    public Adventurer turnRight() throws AdventurerUnknownActionException {
         return new AdventurerBuilder()
                 .setHorizontalValue(horizontalValue)
                 .setVerticalValue(verticalValue)

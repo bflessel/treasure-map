@@ -1,6 +1,8 @@
 package adventurer;
 
+import domain.InputLine.*;
 import domain.adventurer.*;
+import domain.treasureMap.*;
 import exceptions.*;
 import org.assertj.core.api.*;
 import org.junit.*;
@@ -64,5 +66,26 @@ public class AdventurerManagerTest {
 
     }
 
+    @Test
+    public void one_adventurer_should_make_one_action() throws WrongAdventurerPlaceException, OutOfMapException, AdventureWrongMoveException, AdventurerUnknownActionException {
+        TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
+        List<InputLine> lines = new ArrayList<>();
+        InputLine line = new InputLineBuilder().setInput("A - Indiana - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine();
+        lines.add(line);
+        map.populate(lines);
+        AdventurerManager adventurerManager = new AdventurerManager();
+        adventurerManager.playActions(map, line.extractAdventurer());
 
+        List<Action> actions = new LinkedList<>(Collections.singletonList(Action.MOVE_FORWARD));
+        Adventurer givenAdventurer = new AdventurerBuilder()
+                .setName("Indiana")
+                .setHorizontalValue(1)
+                .setVerticalValue(0)
+                .setOrientation(Orientation.valueOfOrDefault("E"))
+                .setMoveSet("A")
+                .setActions(actions)
+                .createAdventurer();
+
+        Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isEqualTo(givenAdventurer);
+    }
 }

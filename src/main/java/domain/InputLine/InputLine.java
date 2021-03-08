@@ -3,6 +3,7 @@ package domain.InputLine;
 import domain.Square.*;
 import domain.adventurer.*;
 import domain.treasureMap.*;
+import exceptions.*;
 
 import java.util.*;
 
@@ -56,7 +57,7 @@ public class InputLine {
         return null;
     }
 
-    public Adventurer extractAdventurer() {
+    public Adventurer extractAdventurer() throws AdventurerUnknownActionException {
         if (this.type == InputLineType.ADVENTURER) {
             String[] splitedInput = input.split(" - ");
             return new AdventurerBuilder()
