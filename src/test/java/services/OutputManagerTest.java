@@ -49,7 +49,7 @@ public class OutputManagerTest {
         map.populate(lines);
         AdventurerManager adventurerManager = new AdventurerManager();
 
-        adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
+        adventurerManager. moveAdventurerForward(map, line.extractAdventurer());
 
         String outputLine = OutputManager.getTreasures(map, lines);
         String givenInputLine = "T - 1 - 0 - 1\n";

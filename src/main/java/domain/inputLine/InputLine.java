@@ -1,5 +1,6 @@
 package domain.inputLine;
 
+import domain.coordinate.*;
 import domain.square.*;
 import domain.adventurer.*;
 import domain.treasureMap.*;
@@ -45,14 +46,17 @@ public class InputLine {
     public Square extractMountain() {
         if (this.type == InputLineType.MOUNTAIN) {
             String[] splitInput = input.split(SEPARATOR);
-            return new SquareBuilder().setHorizontalValue(Integer.parseInt(splitInput[1])).setVerticalValue(Integer.parseInt(splitInput[2])).setIsMountain(true).createSquare();
+            return new SquareBuilder().setCoordinate(new CoordinateBuilder().setHorizontalValue(Integer.parseInt(splitInput[1])).setVerticalValue(Integer.parseInt(splitInput[2])).createCoordinate())
+                    .setIsMountain(true).createSquare();
         }
         return null;    }
 
     public Square extractTreasure() {
         if (this.type == InputLineType.TREASURE) {
             String[] splitInput = input.split(" - ");
-            return new SquareBuilder().setHorizontalValue(Integer.parseInt(splitInput[1])).setVerticalValue(Integer.parseInt(splitInput[2])).setTreasureNumber(Integer.parseInt(splitInput[3])).setIsTreasure(true).createSquare();
+            return new SquareBuilder().setCoordinate(
+                    new CoordinateBuilder().setHorizontalValue(Integer.parseInt(splitInput[1])).setVerticalValue(Integer.parseInt(splitInput[2])).createCoordinate())
+                    .setTreasureNumber(Integer.parseInt(splitInput[3])).setIsTreasure(true).createSquare();
         }
         return null;
     }
@@ -60,10 +64,10 @@ public class InputLine {
     public Adventurer extractAdventurer() throws AdventurerUnknownActionException {
         if (this.type == InputLineType.ADVENTURER) {
             String[] splitInput = input.split(" - ");
+
             return new AdventurerBuilder()
                     .setName(splitInput[1])
-                    .setHorizontalValue(Integer.parseInt(splitInput[2]))
-                    .setVerticalValue(Integer.parseInt(splitInput[3]))
+                    .setCoordinate(new CoordinateBuilder().setHorizontalValue(Integer.parseInt(splitInput[2])).setVerticalValue(Integer.parseInt(splitInput[3])).createCoordinate())
                     .setOrientation(Orientation.valueOfOrDefault(splitInput[4]))
                     .setMoveSet(splitInput[5])
                     .setTreasureNumber(new TreasureNumber(0))

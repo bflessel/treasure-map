@@ -1,6 +1,6 @@
 package services;
 
-import domain.square.*;
+import domain.coordinate.*;
 import domain.adventurer.*;
 import domain.treasureMap.*;
 import exceptions.*;
@@ -29,7 +29,7 @@ public class AdventurerManager {
     }
 
     public void moveAdventurerForward(TreasureMap map, Adventurer adventurer) throws AdventurerUnknownActionException {
-        Square nextSquare = adventurer.getForwardSquare();
+        Coordinate nextSquare = adventurer.getForwardSquare();
         map.moveAdventurer(adventurer, nextSquare);
     }
 

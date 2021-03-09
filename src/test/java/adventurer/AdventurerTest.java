@@ -1,7 +1,8 @@
 package adventurer;
 
-import domain.inputLine.*;
 import domain.adventurer.*;
+import domain.coordinate.*;
+import domain.inputLine.*;
 import domain.treasureMap.*;
 import exceptions.*;
 import org.assertj.core.api.*;
@@ -24,10 +25,14 @@ public class AdventurerTest {
         for (InputLine line : lines) {
             adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
         }
-        Adventurer givenAdventurer = new AdventurerBuilder().setName("Drake").setHorizontalValue(1).setVerticalValue(0).setOrientation(Orientation.valueOfOrDefault("E")).setMoveSet("A").setActions(new Actions()).createAdventurer();
-        Adventurer givenAdventurer1 = new AdventurerBuilder().setName("BlackBeard").setHorizontalValue(0).setVerticalValue(1).setOrientation(Orientation.valueOfOrDefault("O")).setMoveSet("A").setActions(new Actions()).createAdventurer();
-        Adventurer givenAdventurer2 = new AdventurerBuilder().setName("Jones").setHorizontalValue(2).setVerticalValue(1).setOrientation(Orientation.valueOfOrDefault("N")).setMoveSet("A").setActions(new Actions()).createAdventurer();
-        Adventurer givenAdventurer3 = new AdventurerBuilder().setName("Surcouf").setHorizontalValue(3).setVerticalValue(3).setOrientation(Orientation.valueOfOrDefault("S")).setMoveSet("A").setActions(new Actions()).createAdventurer();
+        Adventurer givenAdventurer = new AdventurerBuilder().setName("Drake").setCoordinate(new CoordinateBuilder().setHorizontalValue(1).setVerticalValue(0).createCoordinate())
+                .setOrientation(Orientation.valueOfOrDefault("E")).setMoveSet("A").setActions(new Actions()).createAdventurer();
+        Adventurer givenAdventurer1 = new AdventurerBuilder().setName("BlackBeard").setCoordinate(new CoordinateBuilder().setHorizontalValue(0).setVerticalValue(1).createCoordinate())
+                .setOrientation(Orientation.valueOfOrDefault("O")).setMoveSet("A").setActions(new Actions()).createAdventurer();
+        Adventurer givenAdventurer2 = new AdventurerBuilder().setName("Jones").setCoordinate(new CoordinateBuilder().setHorizontalValue(2).setVerticalValue(1).createCoordinate())
+                .setOrientation(Orientation.valueOfOrDefault("N")).setMoveSet("A").setActions(new Actions()).createAdventurer();
+        Adventurer givenAdventurer3 = new AdventurerBuilder().setName("Surcouf").setCoordinate(new CoordinateBuilder().setHorizontalValue(3).setVerticalValue(3).createCoordinate())
+                .setOrientation(Orientation.valueOfOrDefault("S")).setMoveSet("A").setActions(new Actions()).createAdventurer();
 
         Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isEqualTo(givenAdventurer);
         Assertions.assertThat(map.getSquare(0, 1).getAdventurer()).isEqualTo(givenAdventurer1);
@@ -62,8 +67,9 @@ public class AdventurerTest {
         map.populate(lines);
         AdventurerManager adventurerManager = new AdventurerManager();
         adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
-        Assertions.assertThat(map.getSquare(0,0).getAdventurer()).isEqualTo(line.extractAdventurer().missTurn());
+        Assertions.assertThat(map.getSquare(0, 0).getAdventurer()).isEqualTo(line.extractAdventurer().missTurn());
     }
+
     @Test
     public void adventurer_should_not_climb_other_adventurers() throws WrongAdventurerPlaceException, OutOfMapException, AdventurerUnknownActionException {
         TreasureMap map = new TreasureMapBuilder().setHorizontalValue(4).setVerticalValue(4).createTreasureMap();
@@ -75,7 +81,7 @@ public class AdventurerTest {
         AdventurerManager adventurerManager = new AdventurerManager();
         adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
 
-        Assertions.assertThat(map.getSquare(0,0).getAdventurer()).isEqualTo(line.extractAdventurer().missTurn());
+        Assertions.assertThat(map.getSquare(0, 0).getAdventurer()).isEqualTo(line.extractAdventurer().missTurn());
 
     }
 
@@ -107,8 +113,7 @@ public class AdventurerTest {
         adventurerManager.turnLeft(map, line.extractAdventurer());
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")
-                .setHorizontalValue(0)
-                .setVerticalValue(0)
+                .setCoordinate(new CoordinateBuilder().setHorizontalValue(0).setVerticalValue(0).createCoordinate())
                 .setOrientation(Orientation.valueOfOrDefault("N"))
                 .setMoveSet("G")
                 .setActions(new Actions())
@@ -128,8 +133,7 @@ public class AdventurerTest {
         adventurerManager.turnRight(map, line.extractAdventurer());
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")
-                .setHorizontalValue(0)
-                .setVerticalValue(0)
+                .setCoordinate(new CoordinateBuilder().setHorizontalValue(0).setVerticalValue(0).createCoordinate())
                 .setOrientation(Orientation.valueOfOrDefault("S"))
                 .setMoveSet("D")
                 .setActions(new Actions())

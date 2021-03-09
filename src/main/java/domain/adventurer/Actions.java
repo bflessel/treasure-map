@@ -24,9 +24,18 @@ public class Actions {
 
     public Actions getNewActionList() {
         LinkedList<Action> newActions = new LinkedList<>(this.actions);
-        newActions.removeFirst();
+        if (newActions.size() > 0) {
+            newActions.removeFirst();
+        }
         return new Actions(newActions);
 
+    }
+
+    @Override
+    public String toString() {
+        return "Actions{" +
+                "actions=" + actions +
+                '}';
     }
 
     @Override
@@ -44,13 +53,6 @@ public class Actions {
     @Override
     public int hashCode() {
         return Objects.hash(actions);
-    }
-
-    @Override
-    public String toString() {
-        return "Actions{" +
-                "actions=" + actions +
-                '}';
     }
 
     public void add(Action action) {

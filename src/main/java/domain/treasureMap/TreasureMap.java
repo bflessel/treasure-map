@@ -1,6 +1,7 @@
 package domain.treasureMap;
 
 import domain.adventurer.*;
+import domain.coordinate.*;
 import domain.inputLine.*;
 import domain.square.*;
 import exceptions.*;
@@ -55,7 +56,7 @@ public class TreasureMap {
             if (line.getType() == InputLineType.ADVENTURER) {
                 Adventurer adventurer = line.extractAdventurer();
                 this.adventurers.add(adventurer);
-                Square adventurerSquare = new SquareBuilder().setHorizontalValue(adventurer.getHorizontalValue()).setVerticalValue(adventurer.getVerticalValue()).setAdventurer(adventurer).createSquare();
+                Square adventurerSquare = new SquareBuilder().setCoordinate(adventurer.getCoordinate()).setAdventurer(adventurer).createSquare();
                 if (canPlaceAdventurer(adventurerSquare)) {
                     this.mapSquares[adventurerSquare.getHorizontalValue()][adventurerSquare.getVerticalValue()] = adventurerSquare;
                 } else {
@@ -105,17 +106,17 @@ public class TreasureMap {
         return this.mapSquares[horizontalValue][verticalValue];
     }
 
-    public void moveAdventurer(Adventurer adventurer, Square nextSquare) throws AdventurerUnknownActionException {
-        if (canMove(nextSquare)) {
-            int verticalValue = nextSquare.getVerticalValue();
-            int horizontalValue = nextSquare.getHorizontalValue();
+    public void moveAdventurer(Adventurer adventurer, Coordinate nextCoordinate) throws AdventurerUnknownActionException {
+        if (canMove(nextCoordinate)) {
+            int verticalValue = nextCoordinate.getVerticalValue();
+            int horizontalValue = nextCoordinate.getHorizontalValue();
             int index = this.adventurers.indexOf(adventurer);
             if (hasTreasure(this.mapSquares[horizontalValue][verticalValue])) {
                 adventurer.addTreasure();
                 this.mapSquares[horizontalValue][verticalValue].loseTreasure();
             }
             this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(null);
-            Adventurer movedAdventurer = adventurer.getMovedAdventurer(horizontalValue, verticalValue);
+            Adventurer movedAdventurer = adventurer.getMovedAdventurer(nextCoordinate);
             this.mapSquares[horizontalValue][verticalValue].setAdventurer(movedAdventurer);
             this.adventurers.set(index, movedAdventurer);
         } else {
@@ -128,7 +129,7 @@ public class TreasureMap {
                 square.getTreasureNumber() > 0;
     }
 
-    private boolean canMove(Square nextSquare) {
+    private boolean canMove(Coordinate nextSquare) {
         return nextSquare.isInLimits(this.horizontalSize, this.verticalSize)
                 && this.mapSquares[nextSquare.getHorizontalValue()][nextSquare.getVerticalValue()].isNotMountain()
                 && this.mapSquares[nextSquare.getHorizontalValue()][nextSquare.getVerticalValue()].hasNoAdventurer();

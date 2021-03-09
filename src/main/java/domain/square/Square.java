@@ -1,22 +1,20 @@
 package domain.square;
 
 import domain.adventurer.*;
+import domain.coordinate.*;
 
 import java.util.*;
 
 
 public class Square {
-    private int horizontalValue;
-    private int verticalValue;
+    private Coordinate coordinate;
     private Boolean isMountain;
     private Boolean isTreasure;
     private TreasureNumber treasureNumber;
     private Adventurer adventurer;
 
-    public Square(int horizontalValue, int verticalValue, boolean isMountain, boolean isTreasure, int treasureNumber, Adventurer adventurer) {
-        this.horizontalValue = horizontalValue;
-        this.verticalValue = verticalValue;
-
+    public Square(Coordinate coordinate, boolean isMountain, boolean isTreasure, int treasureNumber, Adventurer adventurer) {
+        this.coordinate = coordinate;
         this.isMountain = isMountain;
         this.isTreasure = isTreasure;
         this.treasureNumber = new TreasureNumber(treasureNumber);
@@ -24,19 +22,16 @@ public class Square {
     }
 
     public boolean isInLimits(int horizontalSize, int verticalSize) {
-        return this.horizontalValue < horizontalSize &&
-                this.verticalValue < verticalSize
-                && this.horizontalValue>=0
-                &&this.verticalValue >=0;
+        return coordinate.isInLimits(horizontalSize,verticalSize);
     }
 
 
     public int getHorizontalValue() {
-        return this.horizontalValue;
+        return this.coordinate.getHorizontalValue();
     }
 
     public int getVerticalValue() {
-        return this.verticalValue;
+        return this.coordinate.getVerticalValue();
     }
 
     public Adventurer getAdventurer() {
@@ -68,18 +63,6 @@ public class Square {
     }
 
     @Override
-    public String toString() {
-        return "Square{" +
-                "horizontalValue=" + horizontalValue +
-                ", verticalValue=" + verticalValue +
-                ", isMountain=" + isMountain +
-                ", isTreasure=" + isTreasure +
-                ", treasureNumber=" + treasureNumber +
-                ", adventurer=" + adventurer +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -88,11 +71,11 @@ public class Square {
             return false;
         }
         Square square = (Square) o;
-        return horizontalValue == square.horizontalValue && verticalValue == square.verticalValue && Objects.equals(isMountain, square.isMountain) && Objects.equals(isTreasure, square.isTreasure) && Objects.equals(treasureNumber, square.treasureNumber) && Objects.equals(adventurer, square.adventurer);
+        return Objects.equals(coordinate, square.coordinate) && Objects.equals(isMountain, square.isMountain) && Objects.equals(isTreasure, square.isTreasure) && Objects.equals(treasureNumber, square.treasureNumber) && Objects.equals(adventurer, square.adventurer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(horizontalValue, verticalValue, isMountain, isTreasure, treasureNumber, adventurer);
+        return Objects.hash(coordinate, isMountain, isTreasure, treasureNumber, adventurer);
     }
 }

@@ -1,7 +1,8 @@
 package adventurer;
 
-import domain.inputLine.*;
 import domain.adventurer.*;
+import domain.coordinate.*;
+import domain.inputLine.*;
 import domain.treasureMap.*;
 import exceptions.*;
 import org.assertj.core.api.*;
@@ -15,8 +16,8 @@ public class AdventurerManagerTest {
     @Test
     public void should_get_Move_Forward_Action() throws AdventurerUnknownActionException {
 
-Actions moveSets = new Actions()     ;
- moveSets.add(Action.MOVE_FORWARD);
+        Actions moveSets = new Actions();
+        moveSets.add(Action.MOVE_FORWARD);
 
         Assertions.assertThat(AdventurerManager.getActions("A")).isEqualTo(moveSets);
 
@@ -79,8 +80,7 @@ Actions moveSets = new Actions()     ;
 
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")
-                .setHorizontalValue(1)
-                .setVerticalValue(0)
+                .setCoordinate(new CoordinateBuilder().setHorizontalValue(1).setVerticalValue(0).createCoordinate())
                 .setOrientation(Orientation.valueOfOrDefault("E"))
                 .setMoveSet("A")
                 .setActions(new Actions())
@@ -104,16 +104,14 @@ Actions moveSets = new Actions()     ;
 
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")
-                .setHorizontalValue(1)
-                .setVerticalValue(0)
+                .setCoordinate(new CoordinateBuilder().setHorizontalValue(1).setVerticalValue(0).createCoordinate())
                 .setOrientation(Orientation.valueOfOrDefault("E"))
                 .setMoveSet("A")
                 .setActions(actions)
                 .createAdventurer();
         Adventurer otherGivenAdventurer = new AdventurerBuilder()
                 .setName("Luke")
-                .setHorizontalValue(1)
-                .setVerticalValue(2)
+                .setCoordinate(new CoordinateBuilder().setHorizontalValue(1).setVerticalValue(2).createCoordinate())
                 .setOrientation(Orientation.valueOfOrDefault("E"))
                 .setMoveSet("A")
                 .setActions(actions)
@@ -136,16 +134,14 @@ Actions moveSets = new Actions()     ;
         Actions actions = new Actions();
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")
-                .setHorizontalValue(2)
-                .setVerticalValue(0)
+                .setCoordinate(new CoordinateBuilder().setHorizontalValue(2).setVerticalValue(0).createCoordinate())
                 .setOrientation(Orientation.valueOfOrDefault("E"))
                 .setMoveSet("AA")
                 .setActions(actions)
                 .createAdventurer();
         Adventurer otherGivenAdventurer = new AdventurerBuilder()
                 .setName("Luke")
-                .setHorizontalValue(2)
-                .setVerticalValue(2)
+                .setCoordinate(new CoordinateBuilder().setHorizontalValue(2).setVerticalValue(2).createCoordinate())
                 .setOrientation(Orientation.valueOfOrDefault("E"))
                 .setMoveSet("AA")
                 .setActions(actions)
@@ -168,15 +164,14 @@ Actions moveSets = new Actions()     ;
         Actions actions = new Actions();
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")
-                .setHorizontalValue(2)
-                .setVerticalValue(2)
+                .setCoordinate(new CoordinateBuilder().setHorizontalValue(2).setVerticalValue(2).createCoordinate())
                 .setOrientation(Orientation.valueOfOrDefault("E"))
                 .setMoveSet("ADAG")
                 .setActions(actions)
                 .createAdventurer();
 
         Assertions.assertThat(map.getSquare(2, 2).getAdventurer()).isEqualTo(givenAdventurer);
-        }
+    }
 
     @Test
     public void two_adventurers_should_make_several_action() throws WrongAdventurerPlaceException, OutOfMapException, AdventurerUnknownActionException {
@@ -191,16 +186,14 @@ Actions moveSets = new Actions()     ;
         Actions actions = new Actions();
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")
-                .setHorizontalValue(0)
-                .setVerticalValue(2)
+                .setCoordinate(new CoordinateBuilder().setHorizontalValue(0).setVerticalValue(2).createCoordinate())
                 .setOrientation(Orientation.valueOfOrDefault("E"))
                 .setMoveSet("AA")
                 .setActions(actions)
                 .createAdventurer();
         Adventurer otherGivenAdventurer = new AdventurerBuilder()
                 .setName("Luke")
-                .setHorizontalValue(1)
-                .setVerticalValue(2)
+                .setCoordinate(new CoordinateBuilder().setHorizontalValue(1).setVerticalValue(2).createCoordinate())
                 .setOrientation(Orientation.valueOfOrDefault("E"))
                 .setMoveSet("GD")
                 .setActions(actions)

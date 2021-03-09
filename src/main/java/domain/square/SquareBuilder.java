@@ -1,24 +1,20 @@
 package domain.square;
 
 import domain.adventurer.*;
+import domain.coordinate.*;
 
 public class SquareBuilder {
-    private int horizontalValue;
-    private int verticalValue;
     private boolean isMountain;
     private boolean isTreasure;
     private int treasureNumber;
     private Adventurer adventurer;
+    private Coordinate coordinate;
 
-    public SquareBuilder setHorizontalValue(int horizontalValue) {
-        this.horizontalValue = horizontalValue;
+    public SquareBuilder setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
         return this;
     }
 
-    public SquareBuilder setVerticalValue(int verticalValue) {
-        this.verticalValue = verticalValue;
-        return this;
-    }
 
     public SquareBuilder setIsMountain(boolean isMountain) {
         this.isMountain = isMountain;
@@ -26,7 +22,7 @@ public class SquareBuilder {
     }
 
     public Square createSquare() {
-        return new Square(horizontalValue, verticalValue, isMountain, isTreasure, treasureNumber, adventurer);
+        return new Square(coordinate, isMountain, isTreasure, treasureNumber, adventurer);
     }
 
     public SquareBuilder setIsTreasure(boolean isTreasure) {

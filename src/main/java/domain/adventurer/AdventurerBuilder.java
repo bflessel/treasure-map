@@ -1,29 +1,19 @@
 package domain.adventurer;
 
+import domain.coordinate.*;
 import domain.square.*;
 import exceptions.*;
 
 public class AdventurerBuilder {
     private String name;
-    private int horizontalValue;
-    private int verticalValue;
     private Orientation orientation;
     private String moveSet;
     private TreasureNumber treasureNumber;
     private Actions actions;
+    private Coordinate coordinate;
 
     public AdventurerBuilder setName(String name) {
         this.name = name;
-        return this;
-    }
-
-    public AdventurerBuilder setHorizontalValue(int horizontalValue) {
-        this.horizontalValue = horizontalValue;
-        return this;
-    }
-
-    public AdventurerBuilder setVerticalValue(int verticalValue) {
-        this.verticalValue = verticalValue;
         return this;
     }
 
@@ -38,7 +28,7 @@ public class AdventurerBuilder {
     }
 
     public Adventurer createAdventurer() throws AdventurerUnknownActionException {
-        return new Adventurer(name, horizontalValue, verticalValue, orientation, moveSet, treasureNumber,actions);
+        return new Adventurer(name,coordinate, orientation, moveSet, treasureNumber,actions);
     }
 
     public AdventurerBuilder setTreasureNumber(TreasureNumber treasureNumber) {
@@ -48,6 +38,11 @@ public class AdventurerBuilder {
 
     public AdventurerBuilder setActions(Actions actions) {
     this.actions = actions;
+        return this;
+    }
+
+    public AdventurerBuilder setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
         return this;
     }
 }
