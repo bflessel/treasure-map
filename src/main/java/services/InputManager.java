@@ -7,6 +7,7 @@ import exceptions.*;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
+import java.util.stream.*;
 
 public class InputManager {
 
@@ -37,11 +38,7 @@ public class InputManager {
 
     public List<InputLine> getAllInputLines(String input) {
         String[] splitLines = input.split(LINE_SEPARATOR);
-        List<InputLine> lines = new ArrayList<>();
-        for (String line : splitLines) {
-            lines.add(getInputLine(line));
-        }
-        return lines;
+        return Arrays.stream(splitLines).map(InputManager::getInputLine).collect(Collectors.toList());
     }
 
     public TreasureMap getMap(List<InputLine> inputList) throws NoMapProvidedException {

@@ -74,12 +74,11 @@ public class TreasureMap {
 
     private void addAttributesFromInput(List<InputLine> lines) throws OutOfMapException {
         for (InputLine line : lines) {
-            Optional<Square> optionalSquare = Optional.empty();
-            if (line.getType() == InputLineType.MOUNTAIN) {
-                optionalSquare = Optional.ofNullable(line.extractMountain());
-            } else if (line.getType() == InputLineType.TREASURE) {
-                optionalSquare = Optional.ofNullable(line.extractTreasure());
-            }
+            Optional<Square> optionalSquare = switch (line.getType()) {
+                case MOUNTAIN -> Optional.ofNullable(line.extractMountain());
+                case TREASURE -> Optional.ofNullable(line.extractTreasure());
+                default -> Optional.empty();
+            };
             if (optionalSquare.isPresent()) {
                 Square square = optionalSquare.get();
                 if (square.isInLimits(this.horizontalSize, this.verticalSize)) {
@@ -149,10 +148,7 @@ public class TreasureMap {
     }
 
     public boolean hasActions() {
-        int counter = 0;
-        for (Adventurer adventurer : this.adventurers) {
-            counter += adventurer.getActions().size();
-        }
+        int counter = this.adventurers.stream().mapToInt(adventurer -> adventurer.getActions().size()).sum();
         return counter > 0;
     }
 

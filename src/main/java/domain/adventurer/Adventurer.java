@@ -66,10 +66,10 @@ public class Adventurer {
     public Square getForwardSquare() {
         SquareBuilder builder = new SquareBuilder();
         switch (this.orientation) {
-            case NORTH -> builder
+            case SOUTH -> builder
                     .setHorizontalValue(this.horizontalValue)
                     .setVerticalValue(this.verticalValue + 1);
-            case SOUTH -> builder
+            case NORTH -> builder
                     .setHorizontalValue(this.horizontalValue)
                     .setVerticalValue(this.verticalValue - 1);
             case WEST -> builder
@@ -175,5 +175,13 @@ public class Adventurer {
                 .setTreasureNumber(treasureNumber)
                 .setActions(getNewActionList())
                 .createAdventurer();
+    }
+
+    public String getOrientation() {
+        return orientation.getName();
+    }
+
+    public String getName() {
+        return name;
     }
 }

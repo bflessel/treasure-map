@@ -77,6 +77,6 @@ public class InputLine {
     }
 
     public String getInput() {
-        return input;
+        return input+ "\n";
     }
 }
