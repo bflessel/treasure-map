@@ -15,8 +15,8 @@ public class AdventurerManagerTest {
     @Test
     public void should_get_Move_Forward_Action() throws AdventurerUnknownActionException {
 
-        List<Action> moveSets = new LinkedList<>();
-        moveSets.add(Action.MOVE_FORWARD);
+Actions moveSets = new Actions()     ;
+ moveSets.add(Action.MOVE_FORWARD);
 
         Assertions.assertThat(AdventurerManager.getActions("A")).isEqualTo(moveSets);
 
@@ -25,7 +25,7 @@ public class AdventurerManagerTest {
     @Test
     public void should_get_turn_left_Action() throws AdventurerUnknownActionException {
 
-        List<Action> moveSets = new LinkedList<>();
+        Actions moveSets = new Actions();
         moveSets.add(Action.TURN_LEFT);
 
         Assertions.assertThat(AdventurerManager.getActions("G")).isEqualTo(moveSets);
@@ -35,7 +35,7 @@ public class AdventurerManagerTest {
     @Test
     public void should_get_turn_right_Action() throws AdventurerUnknownActionException {
 
-        List<Action> moveSets = new LinkedList<>();
+        Actions moveSets = new Actions();
         moveSets.add(Action.TURN_RIGHT);
 
         Assertions.assertThat(AdventurerManager.getActions("D")).isEqualTo(moveSets);
@@ -46,7 +46,7 @@ public class AdventurerManagerTest {
     @Test
     public void should_throw_when_wrong_action() throws AdventurerUnknownActionException {
 
-        List<Action> moveSets = new LinkedList<>();
+        Actions moveSets = new Actions();
         moveSets.add(Action.TURN_RIGHT);
         Assertions.assertThatThrownBy(() -> AdventurerManager.getActions("U"))
                 .isInstanceOf(AdventurerUnknownActionException.class);
@@ -58,7 +58,7 @@ public class AdventurerManagerTest {
     @Test
     public void should_get_action_list() throws AdventurerUnknownActionException {
 
-        List<Action> moveSets = new LinkedList<>();
+        Actions moveSets = new Actions();
         moveSets.add(Action.TURN_RIGHT);
         moveSets.add(Action.TURN_LEFT);
         moveSets.add(Action.MOVE_FORWARD);
@@ -83,7 +83,7 @@ public class AdventurerManagerTest {
                 .setVerticalValue(0)
                 .setOrientation(Orientation.valueOfOrDefault("E"))
                 .setMoveSet("A")
-                .setActions(new LinkedList<>())
+                .setActions(new Actions())
                 .createAdventurer();
 
         Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isEqualTo(givenAdventurer);
@@ -100,7 +100,8 @@ public class AdventurerManagerTest {
         AdventurerManager adventurerManager = new AdventurerManager();
         adventurerManager.playAllActions(map);
 
-        List<Action> actions = new LinkedList<>();
+        Actions actions = new Actions();
+
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")
                 .setHorizontalValue(1)
@@ -132,7 +133,7 @@ public class AdventurerManagerTest {
         AdventurerManager adventurerManager = new AdventurerManager();
         adventurerManager.playAllActions(map);
 
-        List<Action> actions = new LinkedList<>();
+        Actions actions = new Actions();
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")
                 .setHorizontalValue(2)
@@ -164,7 +165,7 @@ public class AdventurerManagerTest {
         AdventurerManager adventurerManager = new AdventurerManager();
         adventurerManager.playAllActions(map);
 
-        List<Action> actions = new LinkedList<>();
+        Actions actions = new Actions();
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")
                 .setHorizontalValue(2)
@@ -187,7 +188,7 @@ public class AdventurerManagerTest {
         AdventurerManager adventurerManager = new AdventurerManager();
         adventurerManager.playAllActions(map);
 
-        List<Action> actions = new LinkedList<>();
+        Actions actions = new Actions();
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")
                 .setHorizontalValue(0)

@@ -12,29 +12,16 @@ public class Adventurer {
     private int verticalValue;
     private final Orientation orientation;
     private final String moveSet;
-    private int treasureNumber;
-    private List<Action> actions;
+    private TreasureNumber treasureNumber;
+    private Actions actions;
 
-    @Override
-    public String toString() {
-        return "Adventurer{" +
-                "name='" + name + '\'' +
-                ", horizontalValue=" + horizontalValue +
-                ", verticalValue=" + verticalValue +
-                ", orientation=" + orientation +
-                ", moveSet='" + moveSet + '\'' +
-                ", treasureNumber=" + treasureNumber +
-                ", actions=" + actions +
-                '}';
-    }
-
-    public Adventurer(String name, int horizontalValue, int verticalValue, Orientation orientation, String moveSet, int treasureNumber, List<Action> actions) throws AdventurerUnknownActionException {
+    public Adventurer(String name, int horizontalValue, int verticalValue, Orientation orientation, String moveSet, TreasureNumber treasureNumber, Actions actions) throws AdventurerUnknownActionException {
         this.name = name;
         this.horizontalValue = horizontalValue;
         this.verticalValue = verticalValue;
         this.orientation = orientation;
         this.moveSet = moveSet;
-        this.treasureNumber = treasureNumber;
+        this.treasureNumber = treasureNumber != null ? treasureNumber : new TreasureNumber() ;
         this.actions = actions != null ? actions : AdventurerManager.getActions(moveSet);
     }
 
@@ -47,7 +34,7 @@ public class Adventurer {
             return false;
         }
         Adventurer that = (Adventurer) o;
-        return horizontalValue == that.horizontalValue && verticalValue == that.verticalValue && treasureNumber == that.treasureNumber && Objects.equals(name, that.name) && orientation == that.orientation && Objects.equals(moveSet, that.moveSet) && Objects.equals(actions, that.actions);
+        return horizontalValue == that.horizontalValue && verticalValue == that.verticalValue && Objects.equals(name, that.name) && orientation == that.orientation && Objects.equals(moveSet, that.moveSet) && Objects.equals(treasureNumber, that.treasureNumber) && Objects.equals(actions, that.actions);
     }
 
     @Override
@@ -96,18 +83,16 @@ public class Adventurer {
 
     }
 
-    private List<Action> getNewActionList() {
-        LinkedList<Action> newActions = new LinkedList<>(this.actions);
-        newActions.removeFirst();
-        return newActions;
+    private Actions getNewActionList() {
+        return this.actions.getNewActionList();
     }
 
     public int getTreasureNumber() {
-        return this.treasureNumber;
+        return this.treasureNumber.giveNumber();
     }
 
     public void addTreasure() {
-        treasureNumber++;
+        treasureNumber.addTreasure();
     }
 
     public Adventurer turnLeft() throws AdventurerUnknownActionException {
@@ -161,8 +146,8 @@ public class Adventurer {
 
     }
 
-    public List<Action> getActions() {
-        return this.actions;
+    public Optional<Action> giveAction() {
+        return actions.giveAction();
     }
 
     public Adventurer missTurn() throws AdventurerUnknownActionException {
@@ -183,5 +168,22 @@ public class Adventurer {
 
     public String getName() {
         return name;
+    }
+
+    public int giveActionNumber() {
+        return actions.giveNumber();
+    }
+
+    @Override
+    public String toString() {
+        return "Adventurer{" +
+                "name='" + name + '\'' +
+                ", horizontalValue=" + horizontalValue +
+                ", verticalValue=" + verticalValue +
+                ", orientation=" + orientation +
+                ", moveSet='" + moveSet + '\'' +
+                ", treasureNumber=" + treasureNumber +
+                ", actions=" + actions +
+                '}';
     }
 }

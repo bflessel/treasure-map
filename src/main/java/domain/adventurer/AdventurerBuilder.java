@@ -1,8 +1,7 @@
 package domain.adventurer;
 
+import domain.square.*;
 import exceptions.*;
-
-import java.util.*;
 
 public class AdventurerBuilder {
     private String name;
@@ -10,8 +9,8 @@ public class AdventurerBuilder {
     private int verticalValue;
     private Orientation orientation;
     private String moveSet;
-    private int treasureNumber;
-    private List<Action> actions;
+    private TreasureNumber treasureNumber;
+    private Actions actions;
 
     public AdventurerBuilder setName(String name) {
         this.name = name;
@@ -42,12 +41,12 @@ public class AdventurerBuilder {
         return new Adventurer(name, horizontalValue, verticalValue, orientation, moveSet, treasureNumber,actions);
     }
 
-    public AdventurerBuilder setTreasureNumber(int treasureNumber) {
+    public AdventurerBuilder setTreasureNumber(TreasureNumber treasureNumber) {
         this.treasureNumber = treasureNumber;
         return this;
     }
 
-    public AdventurerBuilder setActions(List<Action> actions) {
+    public AdventurerBuilder setActions(Actions actions) {
     this.actions = actions;
         return this;
     }

@@ -4,12 +4,13 @@ import domain.adventurer.*;
 
 import java.util.*;
 
+
 public class Square {
     private int horizontalValue;
     private int verticalValue;
-    private boolean isMountain;
-    private boolean isTreasure;
-    private int treasureNumber;
+    private Boolean isMountain;
+    private Boolean isTreasure;
+    private TreasureNumber treasureNumber;
     private Adventurer adventurer;
 
     public Square(int horizontalValue, int verticalValue, boolean isMountain, boolean isTreasure, int treasureNumber, Adventurer adventurer) {
@@ -18,7 +19,7 @@ public class Square {
 
         this.isMountain = isMountain;
         this.isTreasure = isTreasure;
-        this.treasureNumber = treasureNumber;
+        this.treasureNumber = new TreasureNumber(treasureNumber);
         this.adventurer = adventurer;
     }
 
@@ -29,22 +30,6 @@ public class Square {
                 &&this.verticalValue >=0;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Square square = (Square) o;
-        return horizontalValue == square.horizontalValue && verticalValue == square.verticalValue && isMountain == square.isMountain && isTreasure == square.isTreasure && treasureNumber == square.treasureNumber && Objects.equals(adventurer, square.adventurer);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(horizontalValue, verticalValue, isMountain, isTreasure, treasureNumber, adventurer);
-    }
 
     public int getHorizontalValue() {
         return this.horizontalValue;
@@ -71,15 +56,43 @@ public class Square {
     }
 
     public int getTreasureNumber() {
-        return treasureNumber;
+        return treasureNumber.giveNumber();
     }
 
     public boolean isTreasure() {
         return isTreasure;
     }
 
-    public void loseATreasure() {
-        treasureNumber--;
+    public void loseTreasure() {
+        treasureNumber.loseTreasure();
     }
 
+    @Override
+    public String toString() {
+        return "Square{" +
+                "horizontalValue=" + horizontalValue +
+                ", verticalValue=" + verticalValue +
+                ", isMountain=" + isMountain +
+                ", isTreasure=" + isTreasure +
+                ", treasureNumber=" + treasureNumber +
+                ", adventurer=" + adventurer +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Square square = (Square) o;
+        return horizontalValue == square.horizontalValue && verticalValue == square.verticalValue && Objects.equals(isMountain, square.isMountain) && Objects.equals(isTreasure, square.isTreasure) && Objects.equals(treasureNumber, square.treasureNumber) && Objects.equals(adventurer, square.adventurer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(horizontalValue, verticalValue, isMountain, isTreasure, treasureNumber, adventurer);
+    }
 }

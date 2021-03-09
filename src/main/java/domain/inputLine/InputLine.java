@@ -66,6 +66,7 @@ public class InputLine {
                     .setVerticalValue(Integer.parseInt(splitInput[3]))
                     .setOrientation(Orientation.valueOfOrDefault(splitInput[4]))
                     .setMoveSet(splitInput[5])
+                    .setTreasureNumber(new TreasureNumber(0))
                     .createAdventurer();
         }
         return null;

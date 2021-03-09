@@ -8,12 +8,12 @@ import exceptions.*;
 import java.util.*;
 
 public class AdventurerManager {
-    public static List<Action> getActions(String inputs) throws AdventurerUnknownActionException {
+    public static Actions getActions(String inputs) throws AdventurerUnknownActionException {
         List<Action> actions = new LinkedList<>();
         for (Character input : inputs.toCharArray()) {
             actions.add(getAction(input));
         }
-        return actions;
+        return new Actions(actions);
 
     }
 
@@ -46,7 +46,7 @@ public class AdventurerManager {
     }
 
     public void playActions(TreasureMap map, Adventurer ad) throws AdventurerUnknownActionException {
-        Optional<Action> action = ad.getActions().stream().findFirst();
+        Optional<Action> action = ad.giveAction();
 
         if (action.isPresent()) {
             playAction(action.get(), map, ad);

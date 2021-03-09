@@ -112,7 +112,7 @@ public class TreasureMap {
             int index = this.adventurers.indexOf(adventurer);
             if (hasTreasure(this.mapSquares[horizontalValue][verticalValue])) {
                 adventurer.addTreasure();
-                this.mapSquares[horizontalValue][verticalValue].loseATreasure();
+                this.mapSquares[horizontalValue][verticalValue].loseTreasure();
             }
             this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(null);
             Adventurer movedAdventurer = adventurer.getMovedAdventurer(horizontalValue, verticalValue);
@@ -148,7 +148,7 @@ public class TreasureMap {
     }
 
     public boolean hasActions() {
-        int counter = this.adventurers.stream().mapToInt(adventurer -> adventurer.getActions().size()).sum();
+        int counter = this.adventurers.stream().mapToInt(Adventurer::giveActionNumber).sum();
         return counter > 0;
     }
 

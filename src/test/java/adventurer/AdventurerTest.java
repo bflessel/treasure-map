@@ -24,10 +24,10 @@ public class AdventurerTest {
         for (InputLine line : lines) {
             adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
         }
-        Adventurer givenAdventurer = new AdventurerBuilder().setName("Drake").setHorizontalValue(1).setVerticalValue(0).setOrientation(Orientation.valueOfOrDefault("E")).setMoveSet("A").setActions(new LinkedList<>()).createAdventurer();
-        Adventurer givenAdventurer1 = new AdventurerBuilder().setName("BlackBeard").setHorizontalValue(0).setVerticalValue(1).setOrientation(Orientation.valueOfOrDefault("O")).setMoveSet("A").setActions(new LinkedList<>()).createAdventurer();
-        Adventurer givenAdventurer2 = new AdventurerBuilder().setName("Jones").setHorizontalValue(2).setVerticalValue(1).setOrientation(Orientation.valueOfOrDefault("N")).setMoveSet("A").setActions(new LinkedList<>()).createAdventurer();
-        Adventurer givenAdventurer3 = new AdventurerBuilder().setName("Surcouf").setHorizontalValue(3).setVerticalValue(3).setOrientation(Orientation.valueOfOrDefault("S")).setMoveSet("A").setActions(new LinkedList<>()).createAdventurer();
+        Adventurer givenAdventurer = new AdventurerBuilder().setName("Drake").setHorizontalValue(1).setVerticalValue(0).setOrientation(Orientation.valueOfOrDefault("E")).setMoveSet("A").setActions(new Actions()).createAdventurer();
+        Adventurer givenAdventurer1 = new AdventurerBuilder().setName("BlackBeard").setHorizontalValue(0).setVerticalValue(1).setOrientation(Orientation.valueOfOrDefault("O")).setMoveSet("A").setActions(new Actions()).createAdventurer();
+        Adventurer givenAdventurer2 = new AdventurerBuilder().setName("Jones").setHorizontalValue(2).setVerticalValue(1).setOrientation(Orientation.valueOfOrDefault("N")).setMoveSet("A").setActions(new Actions()).createAdventurer();
+        Adventurer givenAdventurer3 = new AdventurerBuilder().setName("Surcouf").setHorizontalValue(3).setVerticalValue(3).setOrientation(Orientation.valueOfOrDefault("S")).setMoveSet("A").setActions(new Actions()).createAdventurer();
 
         Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isEqualTo(givenAdventurer);
         Assertions.assertThat(map.getSquare(0, 1).getAdventurer()).isEqualTo(givenAdventurer1);
@@ -111,7 +111,7 @@ public class AdventurerTest {
                 .setVerticalValue(0)
                 .setOrientation(Orientation.valueOfOrDefault("N"))
                 .setMoveSet("G")
-                .setActions(new LinkedList<>())
+                .setActions(new Actions())
                 .createAdventurer();
 
         Assertions.assertThat(map.getSquare(0, 0).getAdventurer()).isEqualTo(givenAdventurer);
@@ -132,7 +132,7 @@ public class AdventurerTest {
                 .setVerticalValue(0)
                 .setOrientation(Orientation.valueOfOrDefault("S"))
                 .setMoveSet("D")
-                .setActions(new LinkedList<>())
+                .setActions(new Actions())
                 .createAdventurer();
 
         Assertions.assertThat(map.getSquare(0, 0).getAdventurer()).isEqualTo(givenAdventurer);
