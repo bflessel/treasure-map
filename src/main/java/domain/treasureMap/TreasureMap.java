@@ -102,8 +102,8 @@ public class TreasureMap {
         }
     }
 
-    public Square getSquare(int horizontalValue, int verticalValue) {
-        return this.mapSquares[horizontalValue][verticalValue];
+    public Square getSquare(Coordinate coordinate) {
+        return this.mapSquares[coordinate.getHorizontalValue()][coordinate.getVerticalValue()];
     }
 
     public void moveAdventurer(Adventurer adventurer, Coordinate nextCoordinate) throws AdventurerUnknownActionException {

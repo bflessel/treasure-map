@@ -26,7 +26,7 @@ public class OutputManager {
 
     public static String getTreasures(TreasureMap map, List<InputLine> lines) {
 
-        return lines.stream().filter(line -> line.getType() == InputLineType.TREASURE).map(InputLine::extractTreasure).map(square -> getTreasureInput(map.getSquare(square.getHorizontalValue(), square.getVerticalValue()))).collect(Collectors.joining());
+        return lines.stream().filter(line -> line.getType() == InputLineType.TREASURE).map(InputLine::extractTreasure).map(square -> getTreasureInput(map.getSquare(square.getCoordinate()))).collect(Collectors.joining());
     }
 
     private static String getTreasureInput(Square square) {

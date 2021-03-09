@@ -44,7 +44,7 @@ public class treasureMapTest {
         lines.add(line);
 
         map.populate(lines);
-        Assertions.assertThat(line.extractMountain()).isEqualTo(map.getSquare(1, 1));
+        Assertions.assertThat(line.extractMountain()).isEqualTo(map.getSquare(new Coordinate(1, 1)));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class treasureMapTest {
         lines.add(line);
 
         map.populate(lines);
-        Square square = map.getSquare(1, 1);
+        Square square = map.getSquare(new Coordinate(1, 1));
         Assertions.assertThat(line.extractTreasure()).isEqualTo(square);
     }
 
@@ -69,7 +69,7 @@ public class treasureMapTest {
         Adventurer givenAdventurer = new AdventurerBuilder().setName("Indiana").setCoordinate(new CoordinateBuilder().setHorizontalValue(1).setVerticalValue(1).createCoordinate())
                 .setOrientation(Orientation.valueOfOrDefault("S")).setMoveSet("AADADA").createAdventurer();
 
-        Assertions.assertThat(givenAdventurer).isEqualTo(map.getSquare(1, 1).getAdventurer());
+        Assertions.assertThat(givenAdventurer).isEqualTo(map.getSquare(new Coordinate(1, 1)).getAdventurer());
 
     }
 

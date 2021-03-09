@@ -86,7 +86,7 @@ public class AdventurerManagerTest {
                 .setActions(new Actions())
                 .createAdventurer();
 
-        Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isEqualTo(givenAdventurer);
+        Assertions.assertThat(map.getSquare(new Coordinate(1, 0)).getAdventurer()).isEqualTo(givenAdventurer);
     }
 
 
@@ -117,8 +117,8 @@ public class AdventurerManagerTest {
                 .setActions(actions)
                 .createAdventurer();
 
-        Assertions.assertThat(map.getSquare(1, 0).getAdventurer()).isEqualTo(givenAdventurer);
-        Assertions.assertThat(map.getSquare(1, 2).getAdventurer()).isEqualTo(otherGivenAdventurer);
+        Assertions.assertThat(map.getSquare(new Coordinate(1, 0)).getAdventurer()).isEqualTo(givenAdventurer);
+        Assertions.assertThat(map.getSquare(new Coordinate(1, 2)).getAdventurer()).isEqualTo(otherGivenAdventurer);
     }
 
     @Test
@@ -147,8 +147,8 @@ public class AdventurerManagerTest {
                 .setActions(actions)
                 .createAdventurer();
 
-        Assertions.assertThat(map.getSquare(2, 0).getAdventurer()).isEqualTo(givenAdventurer);
-        Assertions.assertThat(map.getSquare(2, 2).getAdventurer()).isEqualTo(otherGivenAdventurer);
+        Assertions.assertThat(map.getSquare(new Coordinate(2, 0)).getAdventurer()).isEqualTo(givenAdventurer);
+        Assertions.assertThat(map.getSquare(new Coordinate(2, 2)).getAdventurer()).isEqualTo(otherGivenAdventurer);
     }
 
 
@@ -170,7 +170,7 @@ public class AdventurerManagerTest {
                 .setActions(actions)
                 .createAdventurer();
 
-        Assertions.assertThat(map.getSquare(2, 2).getAdventurer()).isEqualTo(givenAdventurer);
+        Assertions.assertThat(map.getSquare(new Coordinate(2, 2)).getAdventurer()).isEqualTo(givenAdventurer);
     }
 
     @Test
@@ -199,8 +199,8 @@ public class AdventurerManagerTest {
                 .setActions(actions)
                 .createAdventurer();
 
-        Assertions.assertThat(map.getSquare(0, 2).getAdventurer()).isEqualTo(givenAdventurer);
-        Assertions.assertThat(map.getSquare(1, 2).getAdventurer()).isEqualTo(otherGivenAdventurer);
+        Assertions.assertThat(map.getSquare(new Coordinate(0, 2)).getAdventurer()).isEqualTo(givenAdventurer);
+        Assertions.assertThat(map.getSquare(new Coordinate(1, 2)).getAdventurer()).isEqualTo(otherGivenAdventurer);
     }
 
 }

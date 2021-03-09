@@ -78,4 +78,8 @@ public class Square {
     public int hashCode() {
         return Objects.hash(coordinate, isMountain, isTreasure, treasureNumber, adventurer);
     }
+
+    public Coordinate getCoordinate() {
+        return this.coordinate;
+    }
 }
