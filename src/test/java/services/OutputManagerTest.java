@@ -47,9 +47,7 @@ public class OutputManagerTest {
         lines.add(line);
         lines.add(new InputLineBuilder().setInput("T - 1 - 0 - 2").setType(InputLineType.TREASURE).createInputLine());
         map.populate(lines);
-        AdventurerManager adventurerManager = new AdventurerManager();
-
-        adventurerManager. moveAdventurerForward(map, line.extractAdventurer());
+        AdventurerManager. moveAdventurerForward(map, line.extractAdventurer());
 
         String outputLine = OutputManager.getTreasures(map, lines);
         String givenInputLine = "T - 1 - 0 - 1\n";
@@ -65,11 +63,9 @@ public class OutputManagerTest {
         lines.add(line);
         lines.add(new InputLineBuilder().setInput("T - 1 - 0 - 2").setType(InputLineType.TREASURE).createInputLine());
         map.populate(lines);
-        AdventurerManager adventurerManager = new AdventurerManager();
+        AdventurerManager.moveAdventurerForward(map, line.extractAdventurer());
 
-        adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
-
-        String outputLine = OutputManager.getAdventurers(map, lines);
+        String outputLine = OutputManager.getAdventurers(map);
         String givenInputLine = "A - Drake - 1 - 0 - E - 1\n";
         assertThat(outputLine).isEqualTo(givenInputLine);
 

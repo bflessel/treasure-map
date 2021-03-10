@@ -9,11 +9,12 @@ import java.util.*;
 
 public class Adventurer {
     private final String name;
-    private Coordinate coordinate;
+    private final Coordinate coordinate;
     private final Orientation orientation;
     private final String moveSet;
-    private TreasureNumber treasureNumber;
-    private Actions actions;
+    private final TreasureNumber treasureNumber;
+    private final Actions actions;
+    public static final String SEPARATOR = " - ";
 
     public Adventurer(String name, Coordinate coordinate, Orientation orientation, String moveSet, TreasureNumber treasureNumber, Actions actions) throws AdventurerUnknownActionException {
         this.name = name;
@@ -138,13 +139,6 @@ public class Adventurer {
                 .createAdventurer();
     }
 
-    public String getOrientation() {
-        return orientation.getName();
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public int giveActionNumber() {
         return actions.giveNumber();
@@ -169,5 +163,17 @@ public class Adventurer {
 
     public Coordinate getCoordinate() {
         return this.coordinate;
+    }
+    public String getAdventurerInput() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("A - ");
+        builder.append(this.name);
+        builder.append(SEPARATOR);
+        OutputManager.appendCoordinates(getHorizontalValue(), getVerticalValue(), builder);
+        builder.append(SEPARATOR)
+                .append(this.orientation.getName())
+                .append(SEPARATOR)
+                .append(getTreasureNumber());
+        return builder.toString();
     }
 }

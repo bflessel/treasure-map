@@ -1,6 +1,5 @@
 package services;
 
-import domain.adventurer.*;
 import domain.inputLine.*;
 import domain.square.*;
 import domain.treasureMap.*;
@@ -40,27 +39,15 @@ public class OutputManager {
         return builder.toString();
     }
 
-    private static void appendCoordinates(int horizontalValue, int verticalValue, StringBuilder builder) {
+    public static void appendCoordinates(int horizontalValue, int verticalValue, StringBuilder builder) {
         builder.append(horizontalValue)
                 .append(SEPARATOR)
                 .append(verticalValue);
     }
 
-    public static String getAdventurers(TreasureMap map, List<InputLine> lines) {
-
-        return map.getAdventurers().stream().map(adventurer -> getAdventurerInput(adventurer) + "\n").collect(Collectors.joining());
+    public static String getAdventurers(TreasureMap map) {
+        return map.getAdventurerInputs();
     }
 
-    private static String getAdventurerInput(Adventurer adventurer) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("A - ");
-        builder.append(adventurer.getName());
-        builder.append(SEPARATOR);
-        appendCoordinates(adventurer.getHorizontalValue(), adventurer.getVerticalValue(), builder);
-        builder.append(SEPARATOR)
-                .append(adventurer.getOrientation())
-                .append(SEPARATOR)
-                .append(adventurer.getTreasureNumber());
-        return builder.toString();
-    }
+
 }

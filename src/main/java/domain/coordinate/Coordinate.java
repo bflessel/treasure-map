@@ -5,8 +5,8 @@ import domain.adventurer.*;
 import java.util.*;
 
 public class Coordinate {
-    private int horizontalValue;
-    private int verticalValue;
+    private final int horizontalValue;
+    private final int verticalValue;
 
     public Coordinate(int horizontalValue, int verticalValue) {
         this.horizontalValue = horizontalValue;

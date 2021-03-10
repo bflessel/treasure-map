@@ -75,8 +75,7 @@ public class AdventurerManagerTest {
         InputLine line = new InputLineBuilder().setInput("A - Indiana - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine();
         lines.add(line);
         map.populate(lines);
-        AdventurerManager adventurerManager = new AdventurerManager();
-        adventurerManager.playActions(map, line.extractAdventurer());
+        AdventurerManager.playActions(map, line.extractAdventurer());
 
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")

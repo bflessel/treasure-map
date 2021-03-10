@@ -10,16 +10,16 @@ import services.*;
 import java.util.*;
 
 public class TreasureMap {
-    private int horizontalSize;
-    private int verticalSize;
-    private Square[][] mapSquares;
-    private List<Adventurer> adventurers;
+    private final int horizontalSize;
+    private final int verticalSize;
+    private final Square[][] mapSquares;
+    private final Adventurers adventurers;
 
     public TreasureMap(int horizontalSize, int verticalSize) {
         this.horizontalSize = horizontalSize;
         this.verticalSize = verticalSize;
         this.mapSquares = new Square[horizontalSize][verticalSize];
-        this.adventurers = new ArrayList<>();
+        this.adventurers = new Adventurers();
     }
 
     @Override
@@ -115,12 +115,12 @@ public class TreasureMap {
                 adventurer.addTreasure();
                 this.mapSquares[horizontalValue][verticalValue].loseTreasure();
             }
-            this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(null);
+            this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()] = this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(null);
             Adventurer movedAdventurer = adventurer.getMovedAdventurer(nextCoordinate);
-            this.mapSquares[horizontalValue][verticalValue].setAdventurer(movedAdventurer);
+            this.mapSquares[horizontalValue][verticalValue] = this.mapSquares[horizontalValue][verticalValue].setAdventurer(movedAdventurer);
             this.adventurers.set(index, movedAdventurer);
         } else {
-            new AdventurerManager().missTurn(this, adventurer);
+            AdventurerManager.missTurn(this, adventurer);
         }
     }
 
@@ -138,23 +138,23 @@ public class TreasureMap {
 
 
     public void updateAdventurer(Adventurer adventurer, int index) {
-        this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(adventurer);
-
+        this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()] = this.mapSquares[adventurer.getHorizontalValue()][adventurer.getVerticalValue()].setAdventurer(adventurer);
         this.adventurers.set(index, adventurer);
-
-    }
-
-    public List<Adventurer> getAdventurers() {
-        return adventurers;
     }
 
     public boolean hasActions() {
-        int counter = this.adventurers.stream().mapToInt(Adventurer::giveActionNumber).sum();
-        return counter > 0;
+        return this.adventurers.haveActions();
     }
 
     public int getAdventurerIndex(Adventurer adventurer) {
         return this.adventurers.indexOf(adventurer);
     }
 
+    public void playAdventurers() throws AdventurerUnknownActionException {
+        adventurers.playAll(this);
+    }
+
+    public String getAdventurerInputs() {
+        return adventurers.getInput();
+    }
 }

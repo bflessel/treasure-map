@@ -7,11 +7,11 @@ import java.util.*;
 
 
 public class Square {
-    private Coordinate coordinate;
-    private Boolean isMountain;
-    private Boolean isTreasure;
-    private TreasureNumber treasureNumber;
-    private Adventurer adventurer;
+    private final Coordinate coordinate;
+    private final Boolean isMountain;
+    private final Boolean isTreasure;
+    private final TreasureNumber treasureNumber;
+    private final Adventurer adventurer;
 
     public Square(Coordinate coordinate, boolean isMountain, boolean isTreasure, int treasureNumber, Adventurer adventurer) {
         this.coordinate = coordinate;
@@ -22,7 +22,7 @@ public class Square {
     }
 
     public boolean isInLimits(int horizontalSize, int verticalSize) {
-        return coordinate.isInLimits(horizontalSize,verticalSize);
+        return coordinate.isInLimits(horizontalSize, verticalSize);
     }
 
 
@@ -46,8 +46,12 @@ public class Square {
         return this.adventurer == null;
     }
 
-    public void setAdventurer(Adventurer adventurer) {
-        this.adventurer = adventurer;
+    public Square setAdventurer(Adventurer adventurer) {
+        return copy(adventurer);
+    }
+
+    private Square copy(Adventurer adventurer) {
+        return new SquareBuilder().setAdventurer(adventurer).setCoordinate(coordinate).setIsMountain(isMountain).setIsTreasure(isTreasure).setTreasureNumber(treasureNumber.giveNumber()).createSquare();
     }
 
     public int getTreasureNumber() {

@@ -3,7 +3,7 @@ package domain.adventurer;
 public enum Orientation {
     SOUTH("S"), EAST("E"), WEST("O"), NORTH("N");
 
-    private String name;
+    private final String name;
 
     Orientation(String n) {
         name = n;

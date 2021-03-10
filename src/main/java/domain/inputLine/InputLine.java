@@ -1,8 +1,8 @@
 package domain.inputLine;
 
+import domain.adventurer.*;
 import domain.coordinate.*;
 import domain.square.*;
-import domain.adventurer.*;
 import domain.treasureMap.*;
 import exceptions.*;
 
@@ -10,8 +10,8 @@ import java.util.*;
 
 public class InputLine {
     public static final String SEPARATOR = " - ";
-    private String input;
-    private InputLineType type;
+    private final String input;
+    private final InputLineType type;
 
     public InputLine(String input, InputLineType type) {
         this.input = input;

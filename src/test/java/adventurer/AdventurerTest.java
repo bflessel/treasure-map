@@ -21,9 +21,8 @@ public class AdventurerTest {
         lines.add(new InputLineBuilder().setInput("A - Jones - 2 - 2 - N - A").setType(InputLineType.ADVENTURER).createInputLine());
         lines.add(new InputLineBuilder().setInput("A - Surcouf - 3 - 3 - S - A").setType(InputLineType.ADVENTURER).createInputLine());
         map.populate(lines);
-        AdventurerManager adventurerManager = new AdventurerManager();
         for (InputLine line : lines) {
-            adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
+            AdventurerManager.moveAdventurerForward(map, line.extractAdventurer());
         }
         Adventurer givenAdventurer = new AdventurerBuilder().setName("Drake").setCoordinate(new CoordinateBuilder().setHorizontalValue(1).setVerticalValue(0).createCoordinate())
                 .setOrientation(Orientation.valueOfOrDefault("E")).setMoveSet("A").setActions(new Actions()).createAdventurer();
@@ -50,8 +49,7 @@ public class AdventurerTest {
         lines.add(line);
         lines.add(new InputLineBuilder().setInput("M - 1 - 0").setType(InputLineType.MOUNTAIN).createInputLine());
         map.populate(lines);
-        AdventurerManager adventurerManager = new AdventurerManager();
-        adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
+        AdventurerManager.moveAdventurerForward(map, line.extractAdventurer());
         Assertions.assertThat(map.getSquare(new Coordinate(0, 0)).getAdventurer()).isEqualTo(line.extractAdventurer().missTurn());
         Assertions.assertThat(map.getSquare(new Coordinate(1, 0)).getAdventurer()).isNotEqualTo(line.extractAdventurer().missTurn());
 
@@ -65,8 +63,7 @@ public class AdventurerTest {
         InputLine line = new InputLineBuilder().setInput("A - Drake - 0 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine();
         lines.add(line);
         map.populate(lines);
-        AdventurerManager adventurerManager = new AdventurerManager();
-        adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
+        AdventurerManager.moveAdventurerForward(map, line.extractAdventurer());
         Assertions.assertThat(map.getSquare(new Coordinate(0, 0)).getAdventurer()).isEqualTo(line.extractAdventurer().missTurn());
     }
 
@@ -78,8 +75,7 @@ public class AdventurerTest {
         lines.add(line);
         lines.add(new InputLineBuilder().setInput("A - BlackBeard - 1 - 0 - E - A").setType(InputLineType.ADVENTURER).createInputLine());
         map.populate(lines);
-        AdventurerManager adventurerManager = new AdventurerManager();
-        adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
+        AdventurerManager.moveAdventurerForward(map, line.extractAdventurer());
 
         Assertions.assertThat(map.getSquare(new Coordinate(0, 0)).getAdventurer()).isEqualTo(line.extractAdventurer().missTurn());
 
@@ -94,9 +90,7 @@ public class AdventurerTest {
         lines.add(line);
         lines.add(new InputLineBuilder().setInput("T - 1 - 0 - 2").setType(InputLineType.TREASURE).createInputLine());
         map.populate(lines);
-        AdventurerManager adventurerManager = new AdventurerManager();
-
-        adventurerManager.moveAdventurerForward(map, line.extractAdventurer());
+        AdventurerManager.moveAdventurerForward(map, line.extractAdventurer());
         Assertions.assertThat(map.getSquare(new Coordinate(1, 0)).getTreasureNumber()).isEqualTo(1);
         Assertions.assertThat(map.getSquare(new Coordinate(1, 0)).getAdventurer().getTreasureNumber()).isEqualTo(1);
 
@@ -109,8 +103,7 @@ public class AdventurerTest {
         InputLine line = new InputLineBuilder().setInput("A - Indiana - 0 - 0 - E - G").setType(InputLineType.ADVENTURER).createInputLine();
         lines.add(line);
         map.populate(lines);
-        AdventurerManager adventurerManager = new AdventurerManager();
-        adventurerManager.turnLeft(map, line.extractAdventurer());
+        AdventurerManager.turnLeft(map, line.extractAdventurer());
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")
                 .setCoordinate(new CoordinateBuilder().setHorizontalValue(0).setVerticalValue(0).createCoordinate())
@@ -129,8 +122,7 @@ public class AdventurerTest {
         InputLine line = new InputLineBuilder().setInput("A - Indiana - 0 - 0 - E - D").setType(InputLineType.ADVENTURER).createInputLine();
         lines.add(line);
         map.populate(lines);
-        AdventurerManager adventurerManager = new AdventurerManager();
-        adventurerManager.turnRight(map, line.extractAdventurer());
+        AdventurerManager.turnRight(map, line.extractAdventurer());
         Adventurer givenAdventurer = new AdventurerBuilder()
                 .setName("Indiana")
                 .setCoordinate(new CoordinateBuilder().setHorizontalValue(0).setVerticalValue(0).createCoordinate())

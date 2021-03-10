@@ -3,7 +3,7 @@ package domain.adventurer;
 import java.util.*;
 
 public class Actions {
-    private List<Action> actions;
+    private final List<Action> actions;
 
     public Actions(List<Action> actions) {
 
