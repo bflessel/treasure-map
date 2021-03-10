@@ -2,9 +2,9 @@ package inputLine;
 
 import domain.adventurer.*;
 import domain.coordinate.*;
-import domain.inputLine.*;
+import domain.inputline.*;
 import domain.square.*;
-import domain.treasureMap.*;
+import domain.treasuremap.*;
 import exceptions.*;
 import org.junit.*;
 

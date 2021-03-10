@@ -2,12 +2,17 @@ package services;
 
 import domain.adventurer.*;
 import domain.coordinate.*;
-import domain.treasureMap.*;
+import domain.treasuremap.*;
 import exceptions.*;
 
 import java.util.*;
 
 public class AdventurerManager {
+
+    public static final char LEFT = 'G';
+    public static final char RIGHT = 'D';
+    public static final char FORWARD = 'A';
+
     public static Actions getActions(String inputs) throws AdventurerUnknownActionException {
         List<Action> actions = new LinkedList<>();
         for (Character input : inputs.toCharArray()) {
@@ -19,9 +24,9 @@ public class AdventurerManager {
 
     private static Action getAction(Character input) throws AdventurerUnknownActionException {
         return switch (input) {
-            case 'G' -> Action.TURN_LEFT;
-            case 'D' -> Action.TURN_RIGHT;
-            case 'A' -> Action.MOVE_FORWARD;
+            case LEFT -> Action.TURN_LEFT;
+            case RIGHT -> Action.TURN_RIGHT;
+            case FORWARD -> Action.MOVE_FORWARD;
             default -> throw new AdventurerUnknownActionException();
 
         };
@@ -47,7 +52,6 @@ public class AdventurerManager {
 
     public static void playActions(TreasureMap map, Adventurer ad) throws AdventurerUnknownActionException {
         Optional<Action> action = ad.giveAction();
-
         if (action.isPresent()) {
             playAction(action.get(), map, ad);
         }

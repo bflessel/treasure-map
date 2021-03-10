@@ -1,14 +1,15 @@
 package services;
 
 
-import domain.inputLine.*;
+import domain.inputline.*;
+import exceptions.*;
 import org.assertj.core.api.*;
 import org.junit.*;
 
 import java.io.*;
 import java.util.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class InputManagerTest {
     public static final String path = "src/test/java/files";
@@ -23,7 +24,7 @@ public class InputManagerTest {
     @Test
     public void should_return_inputString_from_input_file() throws IOException {
         String content = InputManager.getInputString(path, fileName);
-        Assertions.assertThat(inputTest).isEqualTo(content);
+        Assertions.assertThat(content).isEqualTo(inputTest);
     }
 
     @Test
@@ -70,7 +71,7 @@ public class InputManagerTest {
         assertThat(InputManager.getInputLine(inputTest)).isNull();
     }
     @Test
-    public void should_return_all_inputLines()  {
+    public void should_return_all_inputLines() throws NoMapProvidedException {
         List<InputLine> givenInputList = new ArrayList<>();
         givenInputList.add(new InputLineBuilder().setInput("C - 3 - 4").setType(InputLineType.MAP).createInputLine());
         givenInputList.add(new InputLineBuilder().setInput("M - 1 - 1").setType(InputLineType.MOUNTAIN).createInputLine());

@@ -1,6 +1,6 @@
 package exceptions;
 
-public class NoMapProvidedException extends Throwable {
+public class NoMapProvidedException extends Exception {
     public NoMapProvidedException() {
     }
 }

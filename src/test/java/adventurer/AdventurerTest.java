@@ -2,8 +2,8 @@ package adventurer;
 
 import domain.adventurer.*;
 import domain.coordinate.*;
-import domain.inputLine.*;
-import domain.treasureMap.*;
+import domain.inputline.*;
+import domain.treasuremap.*;
 import exceptions.*;
 import org.assertj.core.api.*;
 import org.junit.*;

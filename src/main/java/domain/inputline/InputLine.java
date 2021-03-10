@@ -1,9 +1,9 @@
-package domain.inputLine;
+package domain.inputline;
 
 import domain.adventurer.*;
 import domain.coordinate.*;
 import domain.square.*;
-import domain.treasureMap.*;
+import domain.treasuremap.*;
 import exceptions.*;
 
 import java.util.*;
@@ -36,7 +36,7 @@ public class InputLine {
     }
 
     public TreasureMap extractMap() {
-        if (this.type == InputLineType.MAP) {
+        if (this.type.isCorrectLine(InputLineType.MAP)) {
             String[] splitInput = input.split(SEPARATOR);
             return new TreasureMapBuilder().setHorizontalValue(Integer.parseInt(splitInput[1])).setVerticalValue(Integer.parseInt(splitInput[2])).createTreasureMap();
         }
@@ -44,12 +44,13 @@ public class InputLine {
     }
 
     public Square extractMountain() {
-        if (this.type == InputLineType.MOUNTAIN) {
+        if (this.type.isCorrectLine(InputLineType.MOUNTAIN)) {
             String[] splitInput = input.split(SEPARATOR);
             return new SquareBuilder().setCoordinate(new CoordinateBuilder().setHorizontalValue(Integer.parseInt(splitInput[1])).setVerticalValue(Integer.parseInt(splitInput[2])).createCoordinate())
                     .setIsMountain(true).createSquare();
         }
-        return null;    }
+        return null;
+    }
 
     public Square extractTreasure() {
         if (this.type == InputLineType.TREASURE) {
@@ -77,11 +78,19 @@ public class InputLine {
 
     }
 
-    public InputLineType getType() {
-        return type;
+    public String getInput() {
+        return input + "\n";
     }
 
-    public String getInput() {
-        return input+ "\n";
+    public boolean isCorrectLine(InputLineType testedType) {
+        return testedType.isCorrectLine(this.type);
+    }
+
+    public Optional<Square> extractMountainOrTreasure() {
+        return switch (type) {
+            case MOUNTAIN -> Optional.ofNullable(extractMountain());
+            case TREASURE -> Optional.ofNullable(extractTreasure());
+            default -> Optional.empty();
+        };
     }
 }

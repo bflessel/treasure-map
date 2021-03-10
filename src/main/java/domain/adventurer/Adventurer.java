@@ -8,6 +8,7 @@ import services.*;
 import java.util.*;
 
 public class Adventurer {
+    public static final String PREFIX = "A - ";
     private final String name;
     private final Coordinate coordinate;
     private final Orientation orientation;
@@ -21,10 +22,9 @@ public class Adventurer {
         this.coordinate = coordinate;
         this.orientation = orientation;
         this.moveSet = moveSet;
-        this.treasureNumber = treasureNumber != null ? treasureNumber : new TreasureNumber() ;
+        this.treasureNumber = treasureNumber != null ? treasureNumber : new TreasureNumber();
         this.actions = actions != null ? actions : AdventurerManager.getActions(moveSet);
     }
-
 
 
     public int getHorizontalValue() {
@@ -39,17 +39,6 @@ public class Adventurer {
         return coordinate.getForwardSquare(orientation);
     }
 
-    @Override
-    public String toString() {
-        return "Adventurer{" +
-                "name='" + name + '\'' +
-                ", coordinate=" + coordinate +
-                ", orientation=" + orientation +
-                ", moveSet='" + moveSet + '\'' +
-                ", treasureNumber=" + treasureNumber +
-                ", actions=" + actions +
-                '}';
-    }
 
     public Adventurer getMovedAdventurer(Coordinate newCoordinate) throws AdventurerUnknownActionException {
         return new AdventurerBuilder()
@@ -89,13 +78,13 @@ public class Adventurer {
 
     private Orientation getLeftOrientation() {
         Orientation newOrientation;
-        switch (this.orientation) {
-            case EAST -> newOrientation = Orientation.NORTH;
-            case NORTH -> newOrientation = Orientation.WEST;
-            case WEST -> newOrientation = Orientation.SOUTH;
-            case SOUTH -> newOrientation = Orientation.EAST;
+        newOrientation = switch (this.orientation) {
+            case EAST -> Orientation.NORTH;
+            case NORTH -> Orientation.WEST;
+            case WEST -> Orientation.SOUTH;
+            case SOUTH -> Orientation.EAST;
             default -> throw new IllegalStateException("Unexpected value: " + this.orientation);
-        }
+        };
         return newOrientation;
     }
 
@@ -113,13 +102,13 @@ public class Adventurer {
 
     private Orientation getRightOrientation() {
         Orientation newOrientation;
-        switch (this.orientation) {
-            case EAST -> newOrientation = Orientation.SOUTH;
-            case SOUTH -> newOrientation = Orientation.WEST;
-            case WEST -> newOrientation = Orientation.NORTH;
-            case NORTH -> newOrientation = Orientation.EAST;
+        newOrientation = switch (this.orientation) {
+            case EAST -> Orientation.SOUTH;
+            case SOUTH -> Orientation.WEST;
+            case WEST -> Orientation.NORTH;
+            case NORTH -> Orientation.EAST;
             default -> throw new IllegalStateException("Unexpected value: " + this.orientation);
-        }
+        };
         return newOrientation;
 
     }
@@ -164,9 +153,10 @@ public class Adventurer {
     public Coordinate getCoordinate() {
         return this.coordinate;
     }
+
     public String getAdventurerInput() {
         StringBuilder builder = new StringBuilder();
-        builder.append("A - ");
+        builder.append(PREFIX);
         builder.append(this.name);
         builder.append(SEPARATOR);
         OutputManager.appendCoordinates(getHorizontalValue(), getVerticalValue(), builder);

@@ -1,7 +1,7 @@
 package services;
 
-import domain.inputLine.*;
-import domain.treasureMap.*;
+import domain.inputline.*;
+import domain.treasuremap.*;
 import exceptions.*;
 import org.junit.*;
 
@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.*;
 public class OutputManagerTest {
 
     @Test
-    public void should_return_map_line() {
+    public void should_return_map_line() throws NoMapProvidedException {
         List<InputLine> givenInputList = new ArrayList<>();
         givenInputList.add(new InputLineBuilder().setInput("C - 3 - 4").setType(InputLineType.MAP).createInputLine());
         givenInputList.add(new InputLineBuilder().setInput("M - 1 - 1").setType(InputLineType.MOUNTAIN).createInputLine());

@@ -1,15 +1,15 @@
 import domain.adventurer.*;
 import domain.coordinate.*;
-import domain.inputLine.*;
+import domain.inputline.*;
 import domain.square.*;
-import domain.treasureMap.*;
+import domain.treasuremap.*;
 import exceptions.*;
 import org.assertj.core.api.*;
 import org.junit.*;
 
 import java.util.*;
 
-public class treasureMapTest {
+public class TreasureMapTest {
     @Test
     public void should_not_validate_incorrect_square() {
         TreasureMap map = new TreasureMapBuilder().setHorizontalValue(3).setVerticalValue(3).createTreasureMap();

@@ -1,6 +1,6 @@
 package exceptions;
 
-public class OutOfMapException extends Throwable{
+public class OutOfMapException extends Exception{
     public OutOfMapException() {
     }
 }

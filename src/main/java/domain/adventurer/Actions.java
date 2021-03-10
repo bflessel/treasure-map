@@ -3,41 +3,33 @@ package domain.adventurer;
 import java.util.*;
 
 public class Actions {
-    private final List<Action> actions;
+    private final List<Action> actionList;
 
     public Actions(List<Action> actions) {
 
-        this.actions = actions;
+        this.actionList = actions;
     }
 
     public Actions() {
-        this.actions = new LinkedList<>();
+        this.actionList = new LinkedList<>();
     }
 
     public int giveNumber() {
-        return actions.size();
+        return actionList.size();
     }
 
     public Optional<Action> giveAction() {
-        return this.actions.stream().findFirst();
+        return this.actionList.stream().findFirst();
     }
 
     public Actions getNewActionList() {
-        LinkedList<Action> newActions = new LinkedList<>(this.actions);
-        if (newActions.size() > 0) {
+        LinkedList<Action> newActions = new LinkedList<>(this.actionList);
+        if (!newActions.isEmpty()) {
             newActions.removeFirst();
         }
         return new Actions(newActions);
 
     }
-
-    @Override
-    public String toString() {
-        return "Actions{" +
-                "actions=" + actions +
-                '}';
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -47,15 +39,15 @@ public class Actions {
             return false;
         }
         Actions actions1 = (Actions) o;
-        return Objects.equals(actions, actions1.actions);
+        return Objects.equals(actionList, actions1.actionList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(actions);
+        return Objects.hash(actionList);
     }
 
     public void add(Action action) {
-        actions.add(action);
+        actionList.add(action);
     }
 }

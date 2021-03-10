@@ -1,5 +1,5 @@
-import domain.inputLine.*;
-import domain.treasureMap.*;
+import domain.inputline.*;
+import domain.treasuremap.*;
 import exceptions.*;
 import services.*;
 

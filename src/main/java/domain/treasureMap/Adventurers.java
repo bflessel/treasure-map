@@ -1,4 +1,4 @@
-package domain.treasureMap;
+package domain.treasuremap;
 
 import domain.adventurer.*;
 import exceptions.*;
@@ -8,39 +8,38 @@ import java.util.*;
 import java.util.stream.*;
 
 public class Adventurers {
-    private final List<Adventurer> adventurers;
+    public static final String CARIAGE_RETURN = "\n";
+    private final List<Adventurer> adventurerList;
 
     public Adventurers() {
-        this.adventurers = new LinkedList<>();
+        this.adventurerList = new LinkedList<>();
     }
 
     public int indexOf(Adventurer adventurer) {
-        return this.adventurers.indexOf(adventurer);
-
+        return this.adventurerList.indexOf(adventurer);
     }
 
     public boolean haveActions() {
-        int counter = this.adventurers.stream().mapToInt(Adventurer::giveActionNumber).sum();
+        int counter = this.adventurerList.stream().mapToInt(Adventurer::giveActionNumber).sum();
         return counter > 0;
     }
 
     public void set(int index, Adventurer adventurer) {
-        this.adventurers.set(index, adventurer);
-
+        this.adventurerList.set(index, adventurer);
     }
 
     public void add(Adventurer adventurer) {
-        this.adventurers.add(adventurer);
+        this.adventurerList.add(adventurer);
     }
 
     public void playAll(TreasureMap map) throws AdventurerUnknownActionException {
-        for (Adventurer adventurer : adventurers) {
+        for (Adventurer adventurer : adventurerList) {
             AdventurerManager.playActions(map, adventurer);
         }
 
     }
 
     public String getInput() {
-        return adventurers.stream().map(adventurer -> adventurer.getAdventurerInput() + "\n").collect(Collectors.joining());
+        return adventurerList.stream().map(adventurer -> adventurer.getAdventurerInput() + CARIAGE_RETURN).collect(Collectors.joining());
     }
 }

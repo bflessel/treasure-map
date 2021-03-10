@@ -54,8 +54,8 @@ public class Coordinate {
     public boolean isInLimits(int horizontalSize, int verticalSize) {
         return this.horizontalValue < horizontalSize &&
                 this.verticalValue < verticalSize
-                && this.horizontalValue>=0
-                &&this.verticalValue >=0;
+                && this.horizontalValue >= 0
+                && this.verticalValue >= 0;
     }
 
 

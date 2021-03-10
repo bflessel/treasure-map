@@ -3,10 +3,10 @@ package domain.square;
 import java.util.*;
 
 public class TreasureNumber {
-    private int treasureNumber;
+    private int number;
 
     public TreasureNumber(int treasureNumber) {
-        this.treasureNumber = treasureNumber;
+        this.number = treasureNumber;
     }
 
     public TreasureNumber() {
@@ -15,11 +15,11 @@ public class TreasureNumber {
 
 
     public void loseTreasure() {
-        treasureNumber--;
+        number--;
     }
 
     public int giveNumber() {
-        return treasureNumber;
+        return number;
     }
 
     @Override
@@ -31,16 +31,16 @@ public class TreasureNumber {
             return false;
         }
         TreasureNumber that = (TreasureNumber) o;
-        return treasureNumber == that.treasureNumber;
+        return number == that.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(treasureNumber);
+        return Objects.hash(number);
     }
 
     public void addTreasure() {
-        treasureNumber++;
+        number++;
     }
 }
 

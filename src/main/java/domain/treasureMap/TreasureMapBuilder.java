@@ -1,4 +1,4 @@
-package domain.treasureMap;
+package domain.treasuremap;
 
 public class TreasureMapBuilder {
     private int horizontalValue;

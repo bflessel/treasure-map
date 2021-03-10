@@ -1,6 +1,6 @@
 package exceptions;
 
-public class WrongAdventurerPlaceException extends Throwable{
+public class WrongAdventurerPlaceException extends Exception{
     public WrongAdventurerPlaceException(){
 
     }

@@ -1,7 +1,7 @@
 package services;
 
-import domain.inputLine.*;
-import domain.treasureMap.*;
+import domain.inputline.*;
+import domain.treasuremap.*;
 import exceptions.*;
 
 import java.io.*;
@@ -42,7 +42,7 @@ public class InputManager {
     }
 
     public TreasureMap getMap(List<InputLine> inputList) throws NoMapProvidedException {
-        Optional<InputLine> optionalMap = inputList.stream().filter(i -> i.getType() == InputLineType.MAP).findFirst();
+        Optional<InputLine> optionalMap = inputList.stream().filter(line -> line.isCorrectLine(InputLineType.MAP)).findFirst();
         TreasureMap map;
         if (optionalMap.isPresent()) {
             map = optionalMap.get().extractMap();

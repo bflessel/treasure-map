@@ -1,6 +1,6 @@
 package exceptions;
 
-public class AdventurerUnknownActionException extends Throwable {
+public class AdventurerUnknownActionException extends Exception {
     public AdventurerUnknownActionException(){
 
     }
